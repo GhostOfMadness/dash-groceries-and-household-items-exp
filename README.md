@@ -5,6 +5,6 @@
 <div style="text-align: justify">There are filters at the top left side of the app for selecting a date range, type of a store, type of products (food, non-food items or all), certain categories or items names. Please, be sure to choose at least one item (or click on the "All" option) and check that the entered time interval is correct. If you make mistakes at these points, the app will not be «broken», it will just show you the error message and not update the data on the page.</div>
 <div style="text-align: justify">Click on the "?" symbol near the object (e.g. the menu, a plot) to learn more about interaction with it. Click on it again to hide the help.</div>
 <div style="text-align: justify">The app supports English and Russian languages, the menu to choose one of them is in the top right corner.</div>
-![main](screenshots/main.png)
+![main](Screenshots/main.png)
 
 <div style="text-align: justify">The app was created using Dash (main user interface) and Plotly (interactive plots).</div>
