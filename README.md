@@ -11,4 +11,4 @@ The app supports English and Russian languages, the menu to choose one of them i
 
 ![main](Screenshots/main.png)
 
-The app was created using [Dash]('https://dash.plotly.com') (main user interface) and [Plotly]('https://plotly.com/python/') (interactive plots).
+The app was created using [Dash](https://dash.plotly.com) (main user interface) and [Plotly](https://plotly.com/python/) (interactive plots).
