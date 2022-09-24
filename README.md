@@ -12,3 +12,36 @@ The app supports English and Russian languages, the menu to choose one of them i
 ![main](Screenshots/main.png)
 
 The app was created using [Dash](https://dash.plotly.com) (main user interface) and [Plotly](https://plotly.com/python/) (interactive plots).
+
+## Running the app locally
+First clone this repository in the following way:
+
+```bash
+git clone https://github.com/GhostOfMadness/dash-groceries-and-household-items-exp
+```
+
+Then `cd` into the repo directory and install necessary dependencies in a virtual environment by these commands:
+
+```bash
+# Create virtual environment
+python -m venv venv # use python3 instead python if Python 2.x is also installed on your machine
+# Activate virtual environment
+source venv/bin/activate  # Windows: \venv\scripts\activate
+# Install dependencies
+pip install -r requirements.txt
+```
+
+After that you can run the app:
+
+```bash
+python app.py
+```
+
+Visit http://127.0.0.1:8050/ in your web browser to interact with the app.
+
+## Screenshots of the app
+
+![graph_2_3_4](Screenshots/graph_2_3_4.png)
+![others_table](Screenshots/others_table.png)
+![graph_5_6](Screenshots/graph_5_6.png)
+![graph_7_foote](Screenshots/graph_7_footer.png)
