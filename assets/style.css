@@ -306,9 +306,12 @@ body {
   border: 0.9px solid #7C6A5B;
   color: #FFF;
 }
-#menu-container #date-picker-range .DayPickerKeyboardShortcuts_show__bottomRight::before {
+/* #menu-container #date-picker-range .DayPickerKeyboardShortcuts_show__bottomRight::before {
   border-right-color: #CCAE8F;
   border-bottom-right-radius: 5px;
+ } */
+ #menu-container #date-picker-range .DayPickerKeyboardShortcuts_buttonReset {
+   visibility: hidden;
  }
 #menu-container #date-picker-range .CalendarDay__hovered_span {
   color: black;
