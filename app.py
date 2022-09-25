@@ -537,13 +537,11 @@ def create_tooltip(n_clicks, title, items_list, add_style={}):
 def update_dictionaries(lang):
     lang_num = 1 if lang == 'English' else 2
     labels_dict = {}
-    # for line in labels_file[:-1]:
-    for line in labels_file:
+    for line in labels_file[:-1]:
         split_line = line.strip().split('*')
         labels_dict[split_line[0]] = split_line[lang_num]
     items_dict = {}
-    # for line in items_file[:-1]:
-    for line in items_file:
+    for line in items_file[:-1]:
         split_line = line.strip().split('*')
         items_dict[split_line[0]] = split_line[lang_num]
     dictionaries = {
