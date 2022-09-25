@@ -1,0 +1,332 @@
+Все*All*Все
+Продукты*Foods*Продукты
+Товары*Non-food items*Товары
+Молочные продукты*Dairy products*Молочные продукты
+Напитки*Beverages*Напитки
+Консервы*Canned foods*Консервы
+Замороженные продукты*Frozen foods*Замороженные продукты
+Хлеб*Breads*Хлеб
+Фрукты и овощи*Fruits and vegetables*Фрукты и овощи
+Кондитерские изделия*Confections*Кондитерские изделия
+Кофе и чай*Coffee and tea*Кофе и чай
+Соусы*Sauces*Соусы
+Рыба*Fish*Рыба
+Мясные продукты*Meat products*Мясные продукты
+Яйца*Eggs*Яйца
+Мясо и птица*Meat*Мясо и птица
+Бакалея*Pantry Staples*Бакалея
+Товары для кота*Cat supplies*Товары для кота
+Товары для дома*Household items*Товары для дома
+Остальные расходы*Other expenses*Остальные расходы
+Сырники, запеканки*Syrniki (Russian cottage cheese pancakes), cottage cheese baked puddings*Сырники, запеканки
+Йогурт*Yogurt*Йогурт
+Кефир*Kefir (a Russian fermented milk drink)*Кефир
+Масло сливочное*Butter*Масло сливочное
+Молоко*Milk*Молоко
+Простокваша*Prostokvasha (a Russian soured milk drink)*Простокваша
+Ряженка*Ryazhenka (a Russian fermented baked milk drink)*Ряженка
+Сгущенное молоко*Condensed milk*Сгущенное молоко
+Сливки*Cream*Сливки
+Сметана*Smetana (a Russian type of sour cream)*Сметана
+Творог*Cottage cheese*Творог
+Куриные ножки*Chicken legs*Куриные ножки
+Говядина*Beef*Говядина
+Грудки куриные*Chicken breast*Грудки куриные
+Индейка*Turkey*Индейка
+Крылья куриные*Chicken wings*Крылья куриные
+Печень куриная*Chicken liver*Печень куриная
+Печень говяжья*Beef liver*Печень говяжья
+Свинина*Pork*Свинина
+Сердечки куриные*Chicken hearts*Сердечки куриные
+Телятина*Veal*Телятина
+Тушка цыпленка*Chicken*Тушка цыпленка
+Яйца куриные*Chicken eggs*Яйца куриные
+Яйца перепелиные*Quail eggs*Яйца перепелиные
+Колбаса*Cooked or dry sausages*Колбаса
+Мясные полуфабрикаты*Meat semi-finished products*Мясные полуфабрикаты
+Паштет*Pâté*Паштет
+Сосиски, сардельки и пр.*Fresh sausages*Сосиски, сардельки и пр.
+Мясные деликатесы*Meat delicacies*Мясные деликатесы
+Холодец*Aspic (meat jelly)*Холодец
+Горбуша*Pink salmon*Горбуша
+Камбала*Flounder*Камбала
+Кета*Silverbrite salmon*Кета
+Минтай*Pollock*Минтай
+Окунь*Perch*Окунь
+Сельдь в масле*Herring in sunflower oil*Сельдь в масле
+Скумбрия*Mackerel*Скумбрия
+Судак*Zander*Судак
+Пикша*Haddock*Пикша
+Треска*Cod*Треска
+Тунец*Tuna*Тунец
+Форель*Trout*Форель
+Слабосоленая рыба*Lightly salted red fish*Слабосоленая рыба
+Хек*Hake*Хек
+Горчица*Mustard*Горчица
+Кетчуп*Tomato ketchup*Кетчуп
+Майонез*Mayonnaise*Майонез
+Маринад*Marinade*Маринад
+Хрен*Chrain (a Russian type of horseradish sauce)*Хрен
+Злаковый батончик*Granola bar*Злаковый батончик
+Булгур*Bulgur*Булгур
+Гречка*Buckwheat*Гречка
+Джем, варенье*Jam*Джем, варенье
+Жевательная резинка*Chewing gum*Жевательная резинка
+Желатин, агар*Gelatin, agar*Желатин, агар
+Желе (в пакетиках)*Quick-cooking jelly (sachets)*Желе (в пакетиках)
+Изюм*Raisins *Изюм
+Ирис*Toffee*Ирис
+Какао*Cocoa*Какао
+Каша быстрого приготовления (в пакетах)*Quick-cooking cereal (sachets)*Каша быстрого приготовления (в пакетах)
+Киноа*Quinoa*Киноа
+Кисель*Kissel powder (for a Russian fruit drink)*Кисель
+Крупа «Дружба»*Millet and rice mixture*Крупа «Дружба»
+Курага*Dried apricots*Курага
+Кускус*Couscous*Кускус
+Лен*Flax*Лен
+Макароны*Pasta*Макароны
+Манная крупа*Semolina*Манная крупа
+Масло льняное*Linseed oil*Масло льняное
+Масло оливковое*Olive oil*Масло оливковое
+Масло подсолнечное*Sunflower oil*Масло подсолнечное
+Мед*Honey*Мед
+Мука*Flour*Мука
+Нут*Chickpeas*Нут
+Ореховая паста*Nut butter*Ореховая паста
+Перловая крупа*Pearl barley*Перловая крупа
+Приправы, специи*Spices*Приправы, специи
+Пшено*Millet*Пшено
+Рис*Rice*Рис
+Сироп*Syrup*Сироп
+Сода*Soda*Сода
+Соль*Salt*Соль
+Фасоль*Beans*Фасоль
+Фруктовое пюре*Fruit purée*Фруктовое пюре
+Готовые завтраки*Breakfast cereal*Готовые завтраки
+Хлопья овсяные, мультизлаковые*Oatmeal, multi-cereal flakes*Хлопья овсяные, мультизлаковые
+Цукаты*Candied peel*Цукаты
+Чернослив*Prunes*Чернослив
+Чечевица*Lentils*Чечевица
+Чурчхела*Churchkhela (a Georgian candle-shaped candy)*Чурчхела
+Кофе*Coffee*Кофе
+Чай*Tea*Чай
+Цикорий*Root chicory (kind of coffee substitute)*Цикорий
+Булочка (в шт.)*Sweet bun (counted in packs)*Булочка (в шт.)
+Вафли*Waffles, wafers*Вафли
+Козинаки*Gozinaki (a Georgian confection made of caramelized nuts)*Козинаки
+Конфеты*Candies*Конфеты
+Круассан*Croissant*Круассан
+Мармелад*Marmalade*Мармелад
+Марципан, нуга*Marzipan, nougat*Марципан, нуга
+Печенье (упак.)*Cookies (counted in packs)*Печенье (упак.)
+Печенье*Cookies*Печенье
+Пряники*Pryaniki (Russian gingerbreads)*Пряники
+Сдобная булочка*Sweet bun*Сдобная булочка
+Украшения для выпечки*Cake decorations*Украшения для выпечки
+Фрукты в шоколаде*Fruits in chocolate*Фрукты в шоколаде
+Халва*Halva*Халва
+Чак-чак*Çäkçäk (chak-chak) (a Tatar sweet)*Чак-чак
+Шоколад*Chocolate*Шоколад
+Авокадо*Avocado*Авокадо
+Базилик*Basil*Базилик
+Баклажаны*Eggplants*Баклажаны
+Брокколи*Broccoli*Брокколи
+Грибы*Edible mushrooms*Грибы
+Кабачки*Zucchini*Кабачки
+Капуста квашеная*Sauerkraut*Капуста квашеная
+Капуста китайская*Chinese cabbage*Капуста китайская
+Капуста белокочанная*Green cabbage*Капуста белокочанная
+Капуста цветная*Cauliflower*Капуста цветная
+Картофель*Potatoes*Картофель
+Кинза*Cilantro*Кинза
+Лук*Onions*Лук
+Морковь*Carrots*Морковь
+Морская капуста*Sea kale*Морская капуста
+Мята, мелисса*Mint, melissa*Мята, мелисса
+Огурцы*Cucumbers*Огурцы
+Перцы*Bell peppers*Перцы
+Петрушка*Parsley*Петрушка
+Редис*Radishes*Редис
+Редька*Daikon*Редька
+Репа*Turnip*Репа
+Руккола*Arugula*Руккола
+Салат «Айсберг»*Lettuce head*Салат «Айсберг»
+Салат листовой*Lettuce leaves*Салат листовой
+Салат (разные виды)*Lettuce (different types)*Салат (разные виды)
+Свекла*Beets*Свекла
+Сельдерей*Celery*Сельдерей
+Томаты*Tomatoes*Томаты
+Тыква*Pumpkin*Тыква
+Укроп*Dill*Укроп
+Фенхель*Fennel*Фенхель
+Чеснок*Garlic*Чеснок
+Шпинат*Spinach*Шпинат
+Абрикосы*Apricots*Абрикосы
+Апельсины*Oranges*Апельсины
+Арбуз*Watermelon*Арбуз
+Бананы*Bananas*Бананы
+Виноград*Grapes*Виноград
+Голубика*Blueberries*Голубика
+Гранат*Pomegranate*Гранат
+Грейпфрут*Grapefruit*Грейпфрут
+Груши*Pears*Груши
+Дыня*Melon*Дыня
+Киви*Kiwifruits*Киви
+Клубника*Strawberries*Клубника
+Лимон*Lemon*Лимон
+Малина*Raspberries*Малина
+Манго*Mango*Манго
+Мандарины*Mandarins*Мандарины
+Нектарины*Nectarines*Нектарины
+Персики*Peaches*Персики
+Помело*Pomelo*Помело
+Сливы*Plums*Сливы
+Хурма*Persimmons*Хурма
+Черешня*Sweet cherries*Черешня
+Яблоки*Apples*Яблоки
+Нераспределяемые расходы на фрукты и овощи*Non-distributable expenses for fruits and vegetables*Нераспределяемые расходы на фрукты и овощи
+Белый хлеб*White bread*Белый хлеб
+Ржаной хлеб*Rye bread*Ржаной хлеб
+Хлеб из пекарни «Волконский»*Bread from the "Volkonsky" bakery*Хлеб из пекарни «Волконский»
+Вареники, пельмени*Frozen varenyky (Ukrainian pierogi), frozen pelmeni (Russian dumplings)*Вареники, пельмени
+Морепродукты (замороженные)*Frozen seafood*Морепродукты (замороженные)
+Мороженое*Ice cream*Мороженое
+Овощи (замороженные)*Frozen vegetables*Овощи (замороженные)
+Ягоды (замороженные)*Frozen berries*Ягоды (замороженные)
+Ветчина (консервированная)*Canned ham*Ветчина (консервированная)
+Говядина (консервированная)*Canned stewed beef*Говядина (консервированная)
+Горох зеленый (консервированный)*Canned green peas*Горох зеленый (консервированный)
+Овощная икра (консервированная)*Canned vegetable caviar*Овощная икра (консервированная)
+Икра минтая*Canned pollock roe*Икра минтая
+Овощной салат (консервированный)*Canned vegetable salad*Овощной салат (консервированный)
+Каперсы*Pickled capers*Каперсы
+Кукуруза (консервированная)*Canned corn*Кукуруза (консервированная)
+Маслины*Canned black olives*Маслины
+Огурцы маринованные*Pickled cucumbers*Огурцы маринованные
+Оливки*Jarred or canned green olives*Оливки
+Паста томатная*Tomato paste*Паста томатная
+Свинина (консервированная)*Canned pork*Свинина (консервированная)
+Фасоль (консервированная)*Canned beans*Фасоль (консервированная)
+Фрукты (консервированные)*Canned fruits*Фрукты (консервированные)
+Вода питьевая*Drinking water*Вода питьевая
+Алкоголь (кроме пива)*Alcohol (except beer)*Алкоголь (кроме пива)
+Квас*Kvass (a Russian fermented cereal-based low alcoholic beverage)*Квас
+Лимонад*Lemonade*Лимонад
+Минеральная вода*Mineral water*Минеральная вода
+Напитки на растительной основе*Plant-based drinks*Напитки на растительной основе
+Пиво*Beer*Пиво
+Смузи*Smoothie*Смузи
+Сок*Juice*Сок
+Ватные диски, палочки*Cotton pads, cotton buds*Ватные диски, палочки
+Влажные салфетки*Wet wipes*Влажные салфетки
+Гигиенические средства*Hygiene products*Гигиенические средства
+Губки, салфетки для посуды*Dishwashing sponges, sponge dishcloths*Губки, салфетки для посуды
+Дезодорант*Deodorant*Дезодорант
+Зубная нить*Dental floss*Зубная нить
+Зубная паста*Toothpaste*Зубная паста
+Зубная щетка*Toothbrush*Зубная щетка
+Кондиционер*Fabric softener*Кондиционер
+Кремы, лосьоны*Creams, lotions (for application to the skin)*Кремы, лосьоны
+Мешки для мусора*Trash bags*Мешки для мусора
+Мыло*Soap*Мыло
+Ополаскиватель для рта*Mouthwash*Ополаскиватель для рта
+Освежитель воздуха*Air freshener*Освежитель воздуха
+Отбеливатель*Bleach*Отбеливатель
+Пакеты (полиэтиленовые)*Plastic bags*Пакеты (полиэтиленовые)
+Пена для бритья*Shaving foam or gel*Пена для бритья
+Платки бумажные*Paper handkerchiefs*Платки бумажные
+Полотенца (для уборки)*Disposable towels*Полотенца (для уборки)
+Порошок стиральный*Powdered laundry detergent*Порошок стиральный
+Прокладки*Pantyliners and menstrual pads*Прокладки
+Салфетки бумажные*Paper napkins*Салфетки бумажные
+Сито для раковины, решетка*Sink strainer, sink grid*Сито для раковины, решетка
+Таблетка для туалета*Toilet bowl cleaner tablet*Таблетка для туалета
+Туалетная бумага, полотенца*Toilet paper, paper towels*Туалетная бумага, полотенца
+Фольга, бумага для выпечки, пакеты для запекания*Aluminium foil, parchment baking paper, oven bags*Фольга, бумага для выпечки, пакеты для запекания
+Влажный кошачий корм*Wet cat food*Влажный кошачий корм
+Сухой кошачий корм*Dry cat food*Сухой кошачий корм
+Наполнитель для кошачьего лотка*Cat litter*Наполнитель для кошачьего лотка
+Антисептик*Antiseptic*Антисептик
+Канцтовары*Stationery*Канцтовары
+Очки*Glasses*Очки
+Носки*Socks*Носки
+Одноразовая посуда*Disposable tableware*Одноразовая посуда
+Пакет (обычный)*Disposable shopping bag*Пакет (обычный)
+Посуда*Tableware*Посуда
+Кисломолочные напитки*Fermented milk drinks*Кисломолочные напитки
+Сыр*Cheese*Сыр
+Копченое мясо*Smoked meat*Копченое мясо
+Копченая рыба*Smoked fish*Копченая рыба
+Икра красная*Red caviar*Икра красная
+Морепродукты*Seafood*Морепродукты
+Соусы (разные виды)*Sauces (different types)*Соусы (разные виды)
+Сухофрукты (кроме изюма, кураги, чернослива)*Dried fruits (except raisins, dried apricots, prunes)*Сухофрукты (кроме изюма, кураги, чернослива)
+Ингредиенты для выпечки*Baking ingredients*Ингредиенты для выпечки
+Хлебцы*Crispbreads*Хлебцы
+Сахар*Sugar*Сахар
+Орехи, семечки*Nuts, seeds*Орехи, семечки
+Продукты быстрого приготовления*Instant foods*Продукты быстрого приготовления
+Зефир, пастила, лукум*Zefir (a Russian marshmallow), pastila, lokum (a Turkish delight)*Зефир, пастила, лукум
+Баранки и сушки*Baranka-type products (Russian bagels)*Баранки и сушки
+Десерт*Dessert (e.g. cake, panna cotta)*Десерт
+Консервированная рыба*Canned fish*Консервированная рыба
+Печень рыбная*Canned fish liver*Печень рыбная
+Чистящие средства*Household chemicals (different types)*Чистящие средства
+Средства для волос*Hairstyle products*Средства для волос
+Прочие товары*Other items*Прочие товары
+Аптечка*First aid kit*Аптечка
+Батарейки*Household batteries*Батарейки
+Бритва*Razor*Бритва
+Буксировочный канат*Towing winch cable*Буксировочный канат
+Варежки*Mittens*Варежки
+Ведро*Bucket*Ведро
+Галоши*Rain boots*Галоши
+Горшки торфяные*Seed starter pots*Горшки торфяные
+Предметы для кухни*Kitchen accessories (different types)*Предметы для кухни
+Семена*Seeds*Семена
+Кашпо*Cachepot (planter)*Кашпо
+Кабель*Cable*Кабель
+Календарь*Calendar*Календарь
+Камень*Sharpening stone*Камень
+Карта лояльности*Loyalty card*Карта лояльности
+Колготки*Tights*Колготки
+Комплекс для ванной*Bubble bath*Комплекс для ванной
+Комплект для полива*Drip irrigation kit*Комплект для полива
+Коннектор*Electrical connector*Коннектор
+Контейнер*Food storage container*Контейнер
+Корзина, ящик*Basket, garden pot*Корзина, ящик
+Товары к Пасхе*Easter goods (e.g. paper Easter bread pans)*Товары к Пасхе
+Лампа*Light bulb*Лампа
+Лента малярная*Masking tape*Лента малярная
+Леска*Fishing line*Леска
+Лопата*Shovel*Лопата
+Маски защитные*Disposable face masks*Маски защитные
+Модуль к фильтру для воды*Replacement water filter*Модуль к фильтру для воды
+Мочалка*Washcloth*Мочалка
+Мышь компьютерная*Computer mouse*Мышь компьютерная
+Одежда*Clothes*Одежда
+Окномойка*Window squeegee*Окномойка
+Открытка*Greeting card*Открытка
+Салфетки для экрана*Wet wipes for screens*Салфетки для экрана
+Свеча*Candle*Свеча
+Спички*Wooden matches*Спички
+Палочки-шампуры*Wooden skewers*Палочки-шампуры
+Перчатки*Gloves*Перчатки
+Пилки для лобзика*Fretsaw blades*Пилки для лобзика
+Пакет подарочный*Gift bag*Пакет подарочный
+Переходник*Adapter*Переходник
+Пластырь*Adhesive bandages*Пластырь
+Поддон*Plant Saucer*Поддон
+Постельное белье*Bedding*Постельное белье
+Прихватки*Potholders*Прихватки
+Рассада*Seedlings*Рассада
+Расческа*Hairbrush*Расческа
+Тряпка для пола*Floor cleaning cloth*Тряпка для пола
+Утюг*Iron*Утюг
+Бытовая химия для сада*Household chemicals for garden toilet*Бытовая химия для сада
+Хомут*Hose clamp*Хомут
+Цветы в горшке*Potted flowers*Цветы в горшке
+Щетка для мытья посуды*Dish brush*Щетка для мытья посуды
+Шарики надувные*Balloons*Шарики надувные
+Шезлонг*Deckchair*Шезлонг
+Штора для ванной*Shower curtain*Штора для ванной

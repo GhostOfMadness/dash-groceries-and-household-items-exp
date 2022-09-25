@@ -1,0 +1,113 @@
+header*Overview of family expenses in grocery stores*Статистика расходов семьи в продуктовых магазинах
+header_description*The plots below show general information about the family of 4 people (without minor children) expenses on food, beverages and household products. During the workweek, purchases were made in convenience stores or supermarkets, on the weekend - in hypermarkets. All the plots are interactive, if you click on the question mark near the plot’s title you will see the tooltip about chart features which can be interesting and useful for you. The app supports English and Russian languages, the menu to choose one of them is in the top right corner.*Графики отображают общую информацию о величине и характере расходов семьи из 4 человек (без несовершеннолетних детей) на продукты и бытовые товары. В течение рабочей недели покупки совершались в супермаркетах или магазинах «у дома», в выходные - в крупном гипермаркете. Все графики являются интерактивными, нажатие на знак вопроса рядом с названием графика откроет инструкцию о способе взаимодействия с ним. Вся информация доступна на русском и английском языке, меню для выбора языка находится вправом верхнем углу.
+date_range*Date Range*Период
+store_type*Store Type*Место покупки
+items_type*Items Type*Тип
+items_category*Items Category*Категория наименования
+items_name*Item's Name*Название позиции
+store_kind_option_all*All*Все
+store_kind_option_hyper*Hypermarket*Гипермаркет
+store_kind_option_super*Supermarket/ Convenience store*Супермаркет/ Магазин "у дома"
+product_type_option_all*All*Все
+product_type_option_food*Foods*Продукты
+product_type_option_goods*Non-food items*Товары
+items_category_placeholder*Select a category...*Выберите категорию...
+items_name_placeholder*Select an item...*Выберите наименование...
+submit_button_label*Submit*Применить
+clear_button_label*Clear*Очистить
+help_button_title*Click here to open or hide the help*Нажмите, чтобы открыть или закрыть справку
+help_menu_title*Help about menu working*Справка по работе с меню
+help_menu_1*Any change of a menu option will return a state of the subsequent options to default values;*Изменение значения какого-либо пункта возвращает состояние последующих пунктов к заданному по умолчанию;
+help_menu_2*The data for days between two nearby purchases in a hypermarket is in a form of one value for all the period and corresponds to the end of this time interval. If an end of such period is selected as a start date, it will be automatically moved to the begin of the period;*Данные за периоды, расположенные между покупками в гипермаркете, представлены в формате единой суммы на дату окончания периода. Если такая дата выбрана в качестве начальной, то она автоматически смещается на дату начала периода;
+help_menu_3*Multiple choice of categories and items’ names is available;*Возможен выбор нескольких категорий и наименований;
+help_menu_4*If you select the «All» option in the category choosing field or the item choosing field and add some another option, the «All» value will be deleted from the area and can be added only after clearing the form. Please consider that trying to select the «All» value while other options are in the category choosing field will be recognized as value changing, despite the unsuccessful result, and therefore will trigger clearing of the item choosing field;*Если в поле выбора категории или названия позиции к варианту "Все" добавить еще какую-либо опцию, то вариант "Все" будет исключен из поля и может быть добавлен снова только после очистки поля. Попытка добавить вариант "Все" к другим категориям распознается как обновление значения и приводит к очистке поля с названиями позиций;
+help_menu_5*Selecting items’ names without prior category choosing is allowed.*Допускается выбор наименований без выбора категорий.
+total_items_label*Items*Наименований
+total_days_label*Days*Дней
+rub_per_day_label*Rubles per day*Руб. в день
+volume_per_day_label*Kg or L/ Packs per day*Кг-л/ шт.-упак. в день
+error_message_1*The start date is later than the end date!*Проверьте корректность выбранного интервала!
+error_message_2*Please select items' names!*Выберете наименования!
+language_tooltip*When changing the language, all values will be returned to the default. Sorry for the inconvenience!*При изменении языка все значения будут возвращены к заданным по умолчанию. Извините на неудобства!
+christmas_holiday*Christmas*Рождество
+defender_day_holiday*Defender of the Fatherland Day*День защитника Отечества
+iwd_holiday*International Women's Day*Международный женский день
+son_birthday_holiday*Son's birthday*День рождения сына
+daughter_birthday_holiday*Daughter's birthday*День рождения дочери
+mom_birthday_holiday*Mom's birthday*День рождения мамы
+dad_birthday_holiday*Dad's birthday*День рождения отца
+worker_holiday*International Workers' Day*Праздник Весны и Труда
+victory_holiday*Victory Day*День Победы
+unity_holiday*Unity Day*День народного единства
+new_year_holiday*New Year*Новый год
+rubles*rub.*руб.
+for*for*за
+max*Max*Макс.
+min*Min*Мин.
+for_period*for the period*за период
+from*from*с
+to*to*по
+date*Date*Дата
+total*Total*Всего
+graph_1_title*Total Expenses by Period*Общий график расходов
+graph_1_help_title*Help about total expenses' plot*Спрака по общему графику расходов
+graph_1_help_1*Points that are marked by the star symbol are correspond to national or family holidays;*Точки, отмеченные звездочками, соотвествуют праздничным дням;
+graph_1_help_2*If you hover the cursor over the graph's point, you will see the sum of expenses for the period (or the date) or the holiday's name;*Наведите курсор на точку графика, чтобы увидеть сумму расходов за один период (или одну дату) или название праздника;
+graph_1_help_3*You can select and zoom the area of the graph that you are interesting in while holding down a trackpad or the left button of a mouse. Double-click to zoom back out.*Зажмите левую кнопку мыши (или трекпад), чтобы выделить и увеличить интересующую область графика. Дважды кликните по графику, чтобы вернуться к исходным осям.
+of_category*of the category*от категории
+of_type*of the type*от типа
+of_total_sum*of the total*от общей суммы
+of_total_vol*of the total*от общего количества
+kg_l*kg/l*кг/л
+packs*packs*шт./упак.
+explanation*incomplete data*неполные данные
+yes*Yes*Да
+no*No*Нет
+sync_title*Enable Synchronization*Включить синхронизацию
+graph_2_title*Items' Cost Shares*Диаграмма затрат по наименованиям
+graph_3_4_title*Items' Quantity Shares (the left plot in kilograms or litres, the right - in packs)*Диаграмма объёма по наименованиям (левый график в килограммах или литрах, правый - в штуках или упаковках)
+graph_3_4_help_title*Help about sunburst plots*Справка по работе с круговыми диаграммами
+graph_3_4_help_1*If you hover the cursor over the chart segment, you will see detailed information about it;*Наведите курсор на сектор диаграммы, чтобы увидеть подробную информацию о нем;
+graph_3_4_help_2_1*If your cursor looks like this*Если ваш курсор выглядит так
+graph_3_4_help_2_2*while you hovering over the segment,*при наведении на сектор,
+graph_3_4_help_2_3*it means that you can "open" it by clicking on it. In this case the selected segment becomes the root node and only its "children" are displayed on the graph. Click on the segment again to back to its "parent" segment;*то данный сектор диаграммы можно "раскрыть", кликнув на него. В этом случае выбранный сектор становится "корневым", а на диаграмме отображаются только входящие в него сектора. Для возврата обратно необходимо повторно кликнуть на сектор;
+graph_3_4_help_2*If your cursor looks like this while you hovering over the segment, it means that you can "open" it by clicking on it. In this case the selected segment becomes the root node and only its "children" are displayed on the graph. Click on the segment again to back to its "parent" segment;*Если курсор выглядит так при наведении на сектор, то данный сектор диаграммы можно "раскрыть", кликнув на него. В этом случае выбранный сектор становится "корневым", а на диаграмме отображаются только входящие в него сектора. Для возврата обратно необходимо повторно кликнуть на сектор;
+graph_3_4_help_3*If you "open" a segment on the cost shares chart and synchronization is on, quantity shares graphs will be redrawn in such way that the "opened" segment will be theirs root node. Please, pay attention that graphs will not be just "opened" but drawn again so return by clicking will no longer work. Feel free to turn synchronization off if it is inconvenient.*Если синхронизация включена, то при "раскрытии" сектора на диаграмме затрат, диаграммы с объемом будут перестроены таким образом, что их "корнем" окажется "раскрытый" сектор. Обратите внимание, что графики именно перестраиваются, а не "раскрываются", поэтому возврат по обратному клику на них не работает. Если это доставляет неудобства, то отключите синхронизацию.
+others_button_label*Show other expenses' detailed information*Показать таблицу по категории "Остальные расходы"
+others_button_title*Click here to open or hide the table*Нажмите, чтобы открыть или скрыть таблицу
+cost*Cost*Затраты
+quantity*Quantity*Количество
+period_count*Period Count*Число периодов
+others_hyper*Other items' purchases in hypermarkets*Покупки прочих товаров в гипермаркетах
+others_super*Other items' purchases in supermarkets and convenience stores*Покупки прочих товаров в супермаркетах и магазинах формата "у дома"
+others_all*Other items' purchases summary data*Сводные данные по покупкам прочих товаров
+others_cost_exp*Measured in rubles*В рублях
+others_quantity_exp*Measured in packs. The value is underlined by two solid red lines if the data is incomplete*В шт./упак. Если данные неполные, то значение подчеркнуто 2-мя красными чертами
+others_count_exp*The number of periods when the item was purchased*Количество периодов, в которых приобретался товар
+others_help_title*Help about other expenses table*Справка о таблице по прочим расходам
+others_help_1*Goods that were not purchased on a regular basis are combined in "Other items" label. The table allows to see costs on each of these items and to learn in what quantity and how often they were purchased.*Позиции, которые приобретались нерегулярно, объединены в одно наименование "Прочие товары". Данная таблица позволяет увидеть величину затрат на каждую из них, а также узнать в каком количестве и как часто они приобретались.
+others_help_2*The headers (except for "Item's name") comprise tooltips that are visible while hovering over headers' cells. Please read them for better understanding of the presented data.*Заголовки таблицы (кроме столбца "Название позиции") снабжены подсказками, которые отображаются при наведении курсора. Пожалуйста, прочтите их, чтобы лучше понимать представленные данные.
+items*item*наименован
+number*Number*Количество
+median*Median*Медиана
+graph_5_title*Items' Number by Period*Количество наименований в периоде
+graph_6_title*Median Cost per Item by Period*Медиана затрат на 1 позицию в периоде
+graph_5_help_title*Help about items' count linear graph*Справка по линейному графику количества позиций
+graph_5_help_2_1*If you hover the cursor over the graph's point, you will see the number of items for the period (or the date) or the holiday's name.*Наведите курсор на точку графика, чтобы увидеть количество наименований за один период (или одну дату) или название праздника.
+graph_5_help_2_2*If the point corresponds to a purchase, the bar on the right plot that displays the data about median cost per item for the same period or date will be highlighted;*Если точка соответствует покупке, то на графике справа будет выделен столбец, отображающий информацию о медиане затрат на 1 позицию за аналогичный период или дату;
+graph_5_help_3*Please consider that bar highlighting requires some time for computation so try to avoid too fast transition between points.*Выделение значения на соседнем графике требует некоторого времени, поэтому старайтесь избегать слишком быстрого перехода между точками.
+graph_6_help_title*Help about linear graph of median cost per item*Справка по линейному графику медианы затрат на 1 позицию
+graph_6_help_2_1*If you hover the cursor over the graph's point, you will see the median cost per item for the period (or the date) or the holiday's name.*Наведите курсор на точку графика, чтобы увидеть медиану затрат на 1 позицию за один период (или одну дату) или название праздника.
+graph_6_help_2_2*If the point corresponds to a purchase, the bar on the left plot that displays the data about items' number for the same period or date will be highlighted;*Если точка соответствует покупке, то на графике слева будет выделен столбец, отображающий информацию о количестве наименований за аналогичный период или дату;
+median_cost_per_item*Median cost per item*Медиана затрат на 1 позицию
+number_of_items*Items' number*Количество наименований
+trend*Trendline*Линейный тренд
+actual*Actual median cost*Фактическая медиана затрат
+predicted*Predicted median cost*Предсказанная медиана затрат
+graph_7_title*Interrelation Between Items' Number and Median Cost per Item*Взаимосвязь количества позиций и медианы затрат на 1 из них
+graph_7_help_title*Help about the scatter plot*Справка по работе с диаграммой рассеяния
+graph_7_help_1*If you hover the cursor over the graph's point, you will see the corresponding period borders or date, the items' number and the median cost per one of them;*Наведите курсор на точку графика, чтобы увидеть количество наименований и медиану стоимости одного из них, а также границы или дату соответствующего периода;
+graph_7_help_3*The trend line equation is calculated by ordinary least squares method;*Уравнение линии тренда получено путем расчета коэффициентов по методу наименьших квадратов без дополнительных преобразований;
+graph_7_help_4*R - coefficient of determination that shows how good the dependent variable (median cost per item) is predicted by the selected feature (items' number). The higher the coefficient value, the stronger the dependence. Please, consider that the coefficient is not representative if a small number of periods is selected.*R - коэффициент детерминации, который показывает насколько хорошо поведение зависимой переменной (медианы затрат) объясняется выбранным признаком (количеством позиций). Чем выше значение коэффициента, тем сильнее зависимость. При малом количестве данных коэффициент нерепрезентативен.
+thanks*Thank you for your interest!*Спасибо за Ваш интерес!
+name*Ovechkina Daria, 2022*Овечкина Дарья, 2022
