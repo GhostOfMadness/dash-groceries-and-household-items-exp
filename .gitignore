@@ -165,3 +165,4 @@ venv_food_expenses
 .DS_Store
 *.ipynb
 *.numbers
+*.xlsx
