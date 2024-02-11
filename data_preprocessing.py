@@ -1,3 +1,5 @@
+import time
+
 import pandas as pd
 from datetime import datetime
 import re
@@ -269,3 +271,14 @@ def data_preprocessing(df):
     quantity_others.index = period_len.keys()
 
     return subcat_cat, prod_subcat, cost, quantity, cost_others, quantity_others, period_len_df
+
+
+if __name__ == '__main__':
+    df = pd.read_csv('data/Products.csv', delimiter=';')
+    total_time = 0
+    for _ in range(100):
+        start = time.time()
+        data_preprocessing(df)
+        end = time.time()
+        total_time += end - start
+    print(total_time/ 100)
