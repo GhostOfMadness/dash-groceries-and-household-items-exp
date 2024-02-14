@@ -18,7 +18,7 @@ from dash.exceptions import PreventUpdate
 from dash.dash_table.Format import Format, Scheme, Symbol
 
 # Data preprocessing function
-import data_preprocessing
+import initial_data.data_preprocessing as data_preprocessing
 # Functions for plots creation
 import plot_functions
 
