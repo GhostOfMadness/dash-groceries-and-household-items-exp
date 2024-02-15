@@ -253,6 +253,14 @@ class DataFileHandler:
                 type_cat_map[self.FOOD_TYPE_NAME].append(cat)
         return type_cat_map
 
+    def __create_new_index(self, current_idx: str):
+        """Create tuple (date type, timestamp) for new index."""
+        split_idx = current_idx.split(' - ')
+        idx_timestamp = datetime.strptime(split_idx[-1], '%d.%m.%Y')
+        if split_idx[0] == split_idx[-1]:
+            return ('weekend', idx_timestamp)
+        return ('workweek', idx_timestamp)
+
     def __create_final_dataframe(
         self,
         df_idx: list[datetime],
@@ -275,7 +283,7 @@ class DataFileHandler:
         return pd.DataFrame(
             getattr(self, initial_df_attr).iloc[:, start_col_idx::2].T.values,
             columns=getattr(self, initial_df_attr).index.get_level_values(1),
-            index=df_idx,
+            index=pd.MultiIndex.from_tuples(df_idx),
         )
 
     def generate_tables(self):
@@ -296,10 +304,12 @@ class DataFileHandler:
         """
         self.__data_preprocess()
 
-        dt_idxs = list(map(
-            lambda x: datetime.strptime(x.split(' - ')[-1], '%d.%m.%Y'),
-            self.df.loc[:, ::2].columns,
-        ))
+        dt_idxs = list(
+            map(
+                self.__create_new_index,
+                self.df.loc[:, ::2].columns,
+            ),
+        )
         self.cat_item_map = self.__create_cat_item_map()
         self.type_cat_map = self.__create_type_category_map()
         self.cost = self.__create_final_dataframe(
