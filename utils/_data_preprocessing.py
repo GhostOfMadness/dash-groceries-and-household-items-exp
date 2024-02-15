@@ -25,15 +25,29 @@ class DataFileHandler:
     item per period.
     """
 
-    BASE_DIR: ClassVar[PosixPath] = Path(__file__).parent
+    APP_DIR: ClassVar[PosixPath] = Path(__file__).parent.parent
 
-    CSV_DATA_FOLDER: ClassVar[str] = 'csv_data'
-    JSON_DATA_FOLDER: ClassVar[str] = 'json_data'
-    INITIAL_DATA_FILE: ClassVar[str] = 'products.csv'
-    CAT_TO_CHANGE_FILE: ClassVar[str] = 'cat_to_change.json'
-    ITEMS_TO_UNITE_FILE: ClassVar[str] = 'items_to_unite.json'
-    MEANINGFUL_OTHERS_ITEMS_FILE: ClassVar[str] = 'meaningful_others.json'
-    TRANSLATE_VOC_FILE: ClassVar[str] = 'translation_dict.json'
+    INITIAL_DATA_DIR: ClassVar[PosixPath] = Path(APP_DIR, 'initial_data')
+    CSV_DATA_DIR: ClassVar[PosixPath] = Path(INITIAL_DATA_DIR, 'csv_data')
+    JSON_DATA_DIR: ClassVar[PosixPath] = Path(INITIAL_DATA_DIR, 'json_data')
+
+    CSV_FILE: ClassVar[PosixPath] = Path(CSV_DATA_DIR, 'products.csv')
+    CAT_TO_CHANGE_FILE: ClassVar[PosixPath] = Path(
+        JSON_DATA_DIR,
+        'cat_to_change.json',
+    )
+    ITEMS_TO_UNITE_FILE: ClassVar[PosixPath] = Path(
+        JSON_DATA_DIR,
+        'items_to_unite.json',
+    )
+    MEANINGFUL_OTHERS_ITEMS_FILE: ClassVar[PosixPath] = Path(
+        JSON_DATA_DIR,
+        'meaningful_others.json',
+    )
+    TRANSLATE_VOC_FILE: ClassVar[PosixPath] = Path(
+        JSON_DATA_DIR,
+        'translation_dict.json',
+    )
 
     UNNECESSARY_FIRST_ROWS_COUNT: ClassVar[int] = 1
     UNNECESSARY_LAST_ROWS_COUNT: ClassVar[int] = 2
@@ -49,13 +63,8 @@ class DataFileHandler:
 
     def __init__(self) -> None:
         """Initialize the dataframe."""
-        data_path = Path(
-            self.BASE_DIR,
-            self.CSV_DATA_FOLDER,
-            self.INITIAL_DATA_FILE,
-        )
         self.df = pd.read_csv(
-            data_path,
+            self.CSV_FILE,
             sep=';',
             index_col=[0, 1],
         )
@@ -78,12 +87,7 @@ class DataFileHandler:
         and save them as key 'items_to_unite' value. Also save the data
         of united items as it's needed in the app.
         """
-        data_path = Path(
-            self.BASE_DIR,
-            self.JSON_DATA_FOLDER,
-            self.MEANINGFUL_OTHERS_ITEMS_FILE,
-        )
-        others = json.load(open(data_path))
+        others = json.load(open(self.MEANINGFUL_OTHERS_ITEMS_FILE))
 
         level_0_cond = self.df.index.get_level_values(0) == others['category']
         level_1_cond = ~self.df.index.get_level_values(1).isin(
@@ -154,12 +158,7 @@ class DataFileHandler:
         strip whitespaces from category and item names and change a category
         value for the given item names.
         """
-        data_path = Path(
-            self.BASE_DIR,
-            self.JSON_DATA_FOLDER,
-            self.CAT_TO_CHANGE_FILE,
-        )
-        cat_to_change_file = json.load(open(data_path))
+        cat_to_change_file = json.load(open(self.CAT_TO_CHANGE_FILE))
 
         name_cat_map = {
             e['item_name']: e['new_category'] for e in cat_to_change_file
@@ -184,12 +183,7 @@ class DataFileHandler:
         to be united summarize corresponding rows and add result as
         the new row. After all drop all used items.
         """
-        data_path = Path(
-            self.BASE_DIR,
-            self.JSON_DATA_FOLDER,
-            self.ITEMS_TO_UNITE_FILE,
-        )
-        unite_items_list = json.load(open(data_path))
+        unite_items_list = json.load(open(self.ITEMS_TO_UNITE_FILE))
 
         other_items = self.__handle_others_items()
         unite_items_list.append(other_items)
@@ -207,12 +201,7 @@ class DataFileHandler:
 
     def __translate_index(self) -> None:
         """Translate index values."""
-        data_path = Path(
-            self.BASE_DIR,
-            self.JSON_DATA_FOLDER,
-            self.TRANSLATE_VOC_FILE,
-        )
-        translate_voc = json.load(open(data_path))
+        translate_voc = json.load(open(self.TRANSLATE_VOC_FILE))
 
         dataframe_names = ('df', 'others_exp')
         for attr in dataframe_names:
