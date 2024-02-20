@@ -23,6 +23,7 @@ html {
     font: var(--base-font);
 }
 
+/* Header */
 header {
     position: relative;
     display: flex;
@@ -60,6 +61,117 @@ h1 {
     height: 40px;
     max-height: 40px;
     margin-left: 25px;
+}
+
+/* Main */
+main {
+    padding: 50px;
+    padding-bottom: 30px;
+}
+
+#first-row-container {
+    display: flex;
+    flex-direction: row;
+    height: 490px;
+}
+
+.card {
+    background-color: var(--card-bg-color);
+}
+
+#menu {
+    width: 320px;
+    height: 100%;
+    margin-right: 20px;
+}
+
+#figure-1 {
+    height: 100%;
+    width: 773px;
+}
+
+.summary-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#figure-1-summary {
+    width: 207px;
+    height: 100%;
+    margin-left: 20px;
+}
+
+.summary-item {
+    height: 90px;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.summary-value-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.summary-value {
+    font: var(--title-font);
+    color: var(--main-text-color);
+    max-width: 101px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.summary-icon {
+    height: 30px;
+    width: 30px;
+}
+
+.summary-label {
+    font: var(--base-font);
+    color: var(--workweek-color);
+}
+
+/* Footer */
+.footer {
+    height: 104px;
+    margin: 0 50px;
+    padding: 20px 0;
+    border-top: 1px solid var(--sup-text-color);
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 175px;
+    height: 25px;
+}
+
+.contact-link {
+    height: 25px;
+}
+
+.contact-icon {
+    height: 25px;
+    max-height: 25px;
+}
+
+.thank-you {
+    color: var(--main-text-color);
+    font: 400 16px "Oswald", sans-serif;
+    letter-spacing: 0.01em;
 }
 
 /* .card {

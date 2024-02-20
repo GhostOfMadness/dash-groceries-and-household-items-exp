@@ -1,0 +1,48 @@
+{
+    "plot_summary": {
+        "figure_1": [
+            {
+                "label": "days",
+                "icon_name": "sum_days.svg",
+                "id": "sum_days"
+            },
+            {
+                "label": "per day",
+                "icon_name": "sum_per_day.svg",
+                "id": "sum_per_day"
+            },
+            {
+                "label": "per day per person",
+                "icon_name": "sum_per_day_per_person.svg",
+                "id": "sum_per_day_per_person"
+            },
+            {
+                "label": "maximum spending",
+                "icon_name": "sum_maximum_spending.svg",
+                "id": "sum_max_spending"
+            },
+            {
+                "label": "minimum spending",
+                "icon_name": "sum_minimum_spending.svg",
+                "id": "sum_min_spending"
+            }
+        ]
+    },
+    "contacts": [
+        {
+            "alt": "Email icon",
+            "img_name": "contacts-mail.svg",
+            "href": "mailto: GhostofMadnessNN@yandex.ru"
+        },
+        {
+            "alt": "Github icon",
+            "img_name": "contacts-github.svg",
+            "href": "https://github.com/GhostOfMadness"
+        },
+        {
+            "alt": "Telegram icon",
+            "img_name": "contacts-telegram.svg",
+            "href": "https://t.me/GhostOfMadness"
+        }
+    ]
+}
