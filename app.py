@@ -132,16 +132,20 @@ def set_item_category_value(item_types, current_value):
     State('date-picker-range', 'start_date'),
     State('date-picker-range', 'end_date'),
     State('date-range-type', 'value'),
+    State('item-category', 'options'),
 )
 def set_item_name_options(
     item_cats: list[str] | None,
     start_date: str,
     end_date: str,
     range_type: str | None,
+    categories: list[str] | None,
 ) -> list[str]:
     """Set item name dropdown list options."""
+    if not item_cats:
+        item_cats = []
     if item_cats and item_cats[0] == 'All':
-        item_cats = list(set(data_handler.item_cat_map.values()))
+        item_cats = categories[1:]
     return callback_utils.set_dropdown_options(
         df=data_handler.cost,
         date_range=(start_date, end_date),
@@ -222,43 +226,83 @@ def clear_sidebar_input(n_clicks: int | None) -> tuple[pd.Timestamp]:
     State('date-picker-range', 'end_date'),
     State('date-range-type', 'value'),
     State('item-category', 'value'),
+    State('item-category', 'options'),
     State('item-name', 'value'),
+    State('item-name', 'options'),
 )
 def save_user_settings(
     n_clicks: int | None,
     start_date: str,
     end_date: str,
     range_type: str | None,
+    chosen_categories: list[str] | None,
     categories: list[str] | None,
+    chosen_items: list[str] | None,
     items: list[str] | None,
-):
+) -> str:
     """Save user input values."""
     error_mask = (
         pd.to_datetime(start_date) > pd.to_datetime(end_date)
-        or not categories
-        or not items
+        or not chosen_categories
+        or not chosen_items
     )
     if error_mask and n_clicks:
         raise PreventUpdate
+
+    if not chosen_categories:
+        chosen_categories = list(set(data_handler.item_cat_map.values()))
+    if chosen_categories[0] == 'All':
+        chosen_categories = categories[1:]
+
+    if not chosen_items:
+        chosen_items = list(data_handler.item_cat_map.keys())
+    if chosen_items[0] == 'All':
+        chosen_items = items[1:]
 
     user_settings = {
         'start_date': start_date,
         'end_date': end_date,
         'range_type': range_type,
-        'categories': categories,
-        'items': items,
+        'categories': chosen_categories,
+        'items': chosen_items,
     }
     return json.dumps(user_settings)
 
 
 @app.callback(
     Output('sum-days', 'children'),
+    Output('sum-per-day', 'children'),
+    Output('sum-per-day-per-person', 'children'),
+    Output('sum-max-spending', 'children'),
+    Output('sum-min-spending', 'children'),
     Input('working-input', 'data'),
 )
-def update_sum_days(working_data):
-    data = json.loads(working_data)
-    print(data)
-    return 1
+def update_summaries(user_settings: str) -> int:
+    """Count total days in the date range."""
+    user_data = json.loads(user_settings)
+    working_data = callback_utils.get_data_slice(
+        df=data_handler.cost,
+        date_range=(user_data['start_date'], user_data['end_date']),
+        date_range_type=user_data['range_type'],
+    )
+    if user_data['items']:
+        working_data = working_data.loc[:, user_data['items']]
+
+    dates = working_data.index.get_level_values(1)
+    period_lengths = callback_utils.count_period_lengths(data_handler.cost)
+    total_days = sum(period_lengths[date_value] for date_value in dates)
+    total_cost = working_data.sum().sum()
+    min_cost = working_data.sum(axis=1).min()
+    max_cost = working_data.sum(axis=1).max()
+    cost_per_day = total_cost / total_days
+    cost_per_day_per_person = cost_per_day / 4
+    return (
+        total_days,
+        f'₽ {cost_per_day:,.2f}'.replace(',', ' '),
+        f'₽ {cost_per_day_per_person:,.2f}'.replace(',', ' '),
+        f'₽ {max_cost:,.2f}'.replace(',', ' '),
+        f'₽ {min_cost:,.2f}'.replace(',', ' '),
+    )
 
 
 if __name__ == '__main__':

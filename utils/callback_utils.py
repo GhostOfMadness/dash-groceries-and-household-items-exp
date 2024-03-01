@@ -59,7 +59,7 @@ def set_dropdown_options(
     df: pd.DataFrame,
     date_range: Sequence[str],
     date_range_type: str | None,
-    parent_value: list[str] | None,
+    parent_value: list[str],
     item_cat_map: dict[str, str],
     cat_type_map: dict[str, str] | None,
     is_item_options: bool = False,
@@ -107,3 +107,19 @@ def correct_dropdown_value(
     if len(current_value) > 1 and 'All' in current_value:
         current_value.remove('All')
     return current_value
+
+
+def count_period_lengths(df: pd.DataFrame) -> dict[pd.Timestamp, int]:
+    """
+    Count period lengths.
+
+    For a weekend date length is equal to 1 as it's just single day.
+    For a workweek date length is equal to the timedelta between
+    the current date and the previous weekend date.
+    """
+    date_idxs = df.index.get_level_values(1).sort_values()
+    return {
+        date_value: (date_value - date_idxs[idx - 1]).days
+        if idx != 0 else 1
+        for idx, date_value in enumerate(date_idxs)
+    }
