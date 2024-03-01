@@ -1,15 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 @import url('https://fonts.cdnfonts.com/css/source-sans-pro');
 
 :root {
     --bg-color: rgb(18, 18, 18);
     --card-bg-color: rgb(30, 30, 30);
+    --select-item-color: rgb(42, 42, 42);
     --main-text-color: rgb(238, 238, 238);
     --sup-text-color: rgb(189, 189, 189);
     --weekend-color: rgb(100, 181, 246);
     --workweek-color: rgb(246, 166, 100);
+    --calendar-day-font-color: rgb(34, 34, 34);
+    --error-color: rgb(207, 102, 121);
+    --disabled-color: rgba(238, 238, 238, 0.3);
+    --sum-icon-color: rgba(238, 238, 238, 0.16);
+    --main-blur-color: rgba(100, 181, 246, 0.75);
+    --calendar-blur-color: rgba(100, 181, 246, 0.85);
     --base-font: 400 14px "Source Sans Pro", sans-serif;
-    --title-font: 400 20px "Oswald", sans-serif;
+    --figure-title-font: 400 20px "Oswald", sans-serif;
+    --menu-item-label-font: 400 18px "Oswald", sans-serif;
 }
 
 * {
@@ -23,44 +32,8 @@ html {
     font: var(--base-font);
 }
 
-/* Header */
-header {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    height: 80px;
-    width: 100%;
-    background-color: var(--card-bg-color);
-    color: var(--main-text-color);
-    padding: 20px 50px;
-}
-
-h1 {
-    font: 400 24px "Oswald", sans-serif;
-    margin-right: auto;
-}
-
-#learn-more-button {
-    padding: 12px 15px;
-    font: var(--base-font);
-    border-radius: 5px;
-    border: 1px solid var(--sup-text-color);
-    background-color: var(--card-bg-color);
+input {
     color: var(--sup-text-color);
-    line-height: 100%;
-    cursor: pointer;
-}
-
-#learn-more-button:hover {
-    border-color: var(--main-text-color);
-    box-shadow: 1px 1px 1px var(--sup-text-color);
-    color: var(--main-text-color);
-}
-
-#logo {
-    height: 40px;
-    max-height: 40px;
-    margin-left: 25px;
 }
 
 /* Main */
@@ -69,6 +42,7 @@ main {
     padding-bottom: 30px;
 }
 
+/* First row */
 #first-row-container {
     display: flex;
     flex-direction: row;
@@ -79,12 +53,7 @@ main {
     background-color: var(--card-bg-color);
 }
 
-#menu {
-    width: 320px;
-    height: 100%;
-    margin-right: 20px;
-}
-
+/* Total expenses plot */
 #figure-1 {
     height: 100%;
     width: 773px;
@@ -102,6 +71,7 @@ main {
     margin-left: 20px;
 }
 
+/* Total expenses plot summary */
 .summary-item {
     height: 90px;
     padding: 15px 20px;
@@ -119,7 +89,7 @@ main {
 }
 
 .summary-value {
-    font: var(--title-font);
+    font: var(--figure-title-font);
     color: var(--main-text-color);
     max-width: 101px;
     text-overflow: ellipsis;
@@ -135,43 +105,6 @@ main {
 .summary-label {
     font: var(--base-font);
     color: var(--workweek-color);
-}
-
-/* Footer */
-.footer {
-    height: 104px;
-    margin: 0 50px;
-    padding: 20px 0;
-    border-top: 1px solid var(--sup-text-color);
-    border-bottom: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.contacts {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 175px;
-    height: 25px;
-}
-
-.contact-link {
-    height: 25px;
-}
-
-.contact-icon {
-    height: 25px;
-    max-height: 25px;
-}
-
-.thank-you {
-    color: var(--main-text-color);
-    font: 400 16px "Oswald", sans-serif;
-    letter-spacing: 0.01em;
 }
 
 /* .card {

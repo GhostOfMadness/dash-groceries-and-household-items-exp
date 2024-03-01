@@ -1,0 +1,16 @@
+{
+    "errors": [
+        {
+            "name": "invalid-date-range",
+            "message": "Invalid date interval. Please make sure that the start date goes before the end date."
+        },
+        {
+            "name": "invalid-categories",
+            "message": "No categories have been chosen. Please select at least one of them or pick 'All' value."
+        },
+        {
+            "name": "invalid-items",
+            "message": "No items have been chosen. Please select at least one of them or pick 'All' value."
+        }
+    ]
+}

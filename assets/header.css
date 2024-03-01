@@ -1,0 +1,38 @@
+header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    width: 100%;
+    background-color: var(--card-bg-color);
+    color: var(--main-text-color);
+    padding: 20px 50px;
+}
+
+h1 {
+    font: 400 24px "Oswald", sans-serif;
+    margin-right: auto;
+}
+
+#learn-more-button {
+    padding: 12px 15px;
+    font: var(--base-font);
+    border-radius: 5px;
+    border: 1px solid var(--sup-text-color);
+    background-color: var(--card-bg-color);
+    color: var(--sup-text-color);
+    line-height: 100%;
+    cursor: pointer;
+}
+
+#learn-more-button:hover {
+    border-color: var(--main-text-color);
+    box-shadow: 1px 1px 1px var(--sup-text-color);
+    color: var(--main-text-color);
+}
+
+#logo {
+    height: 40px;
+    max-height: 40px;
+    margin-left: 25px;
+}

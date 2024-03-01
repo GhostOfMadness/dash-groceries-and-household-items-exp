@@ -1,0 +1,396 @@
+/* Table of contents
+––––––––––––––––––––––––––––––––––––––––––––––––––
+- Sidebar container
+- Date range picker
+    - Date input field
+    - Calendar container
+    - Calendar week headers
+    - Calendar navigation buttons
+    - Calendar days
+- Radio items
+- Dropdown list
+- Buttons (to submit or clear)
+- Error message
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/* Sidebar container */
+#sidebar {
+    width: 320px;
+    height: 100%;
+    margin-right: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+
+.sidebar-item {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.sidebar-item-label {
+    font: var(--menu-item-label-font);
+    color: var(--main-text-color);
+    margin-bottom: 10px;
+}
+
+/* Date range picker */
+/* Date input field */
+#date-picker-range,
+.DateRangePicker,
+.DateRangePickerInput {
+    width: 100%;
+}
+
+.DateRangePickerInput {
+    height: 40px;
+    background-color: var(--card-bg-color);
+    border: none;
+    border-bottom: 1px solid var(--sup-text-color);
+}
+
+.DateInput {
+    height: 40px;
+    padding: 10px 0;
+    background-color: var(--card-bg-color);
+    border-bottom: 1px solid var(--sup-text-color);
+}
+
+.DateInput_input {
+    background-color: var(--card-bg-color);
+    font: var(--base-font);
+    color: var(--sup-text-color);
+    padding: 0;
+    padding-left: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.DateInput_input::placeholder {
+    color: var(--sup-text-color);
+}
+
+.DateRangePickerInput div:last-child .DateInput_input {
+    padding-left: 0;
+    padding-right: 10px;
+    text-align: end;
+}
+
+.DateRangePickerInput_arrow {
+    width: 38px;
+    background-image: url(../assets/img/date-arrow.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.DateRangePickerInput_arrow_svg {
+    visibility: hidden;
+}
+
+/* Calendar container */
+.DateInput_fangStroke {
+    fill: var(--weekend-color);
+    stroke: var(--weekend-color);
+}
+
+.DateRangePicker_picker,
+.DayPicker,
+.DayPicker_transitionContainer,
+.CalendarMonth,
+.CalendarMonthGrid  {
+    background-color: var(--select-item-color);
+}
+
+.DateRangePicker_picker {
+    border: 1px solid var(--weekend-color);
+    border-image: linear-gradient(
+        to right top,
+        var(--weekend-color),
+        var(--select-item-color),
+        var(--weekend-color)
+    );
+    border-image-slice: 1;
+    width: 300px !important;
+}
+
+.DayPicker_transitionContainer,
+.DayPicker,
+.CalendarMonthGrid,
+.DayPicker_focusRegion,
+.CalendarMonthGrid_month__horizontal,
+[style="width: 318px;"] {
+    width: 298px !important;
+}
+
+.CalendarMonthGrid__horizontal {
+    left: 0;
+}
+
+.DayPickerKeyboardShortcuts_show__bottomRight {
+    visibility: hidden;
+}
+
+/* Calendar week headers */
+.CalendarMonth_caption,
+.DayPicker_weekHeader {
+    color: var(--main-text-color);
+}
+
+.DayPicker_weekHeader {
+    padding: 0 !important;
+    width: 100%;
+}
+
+.DayPicker_weekHeaders {
+    margin: 0 16px !important;
+}
+
+.DayPicker_weekHeader_li {
+    width: 38px !important;
+}
+
+/* Calendar navigation buttons */
+.DayPickerNavigation_button__default {
+    background: transparent;
+    border: none;
+    width: 38px;
+
+}
+
+.DayPickerNavigation_button__default::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    left: -2px;
+    right: -2px;
+    background: linear-gradient(
+        to right,
+        var(--weekend-color) 0%,
+        var(--sum-icon-color) 30%,
+        var(--sum-icon-color) 70%, 
+        var(--weekend-color) 100%
+    );
+    border-radius: 4px;
+    z-index: -1;    
+}
+
+.DayPickerNavigation_button__default:hover {
+    border: none;
+    transform: scale(1.1);
+}
+
+.DayPickerNavigation_button__default:active {
+    outline: 0;
+    background: transparent;
+}
+
+.DayPickerNavigation_button__default:focus {
+    border: none;
+}
+
+.DayPickerNavigation_svg__horizontal {
+    fill: var(--sup-text-color);
+}
+
+.DayPickerNavigation_leftButton__horizontalDefault {
+    left: 18px;
+}
+
+.DayPickerNavigation_rightButton__horizontalDefault {
+    right: 18px;
+}
+
+/* Calendar days */
+.CalendarMonth {
+    padding: 0 16px !important;
+}
+
+.CalendarDay {
+    background-color: var(--select-item-color);
+    color: var(--sup-text-color);
+    width: 38px !important;
+    border: none;
+}
+
+.CalendarDay__selected,
+.CalendarDay__default:hover {
+    background-color: var(--weekend-color);
+    border: none;
+    border-radius: 50%;
+    color: var(--calendar-day-font-color);
+    font-weight: bold;
+}
+
+.CalendarDay__selected_span {
+    color: var(--calendar-day-font-color);
+    background: radial-gradient(20px circle at center, var(--calendar-blur-color) 40%, transparent 90%);
+}
+
+.CalendarDay__blocked_out_of_range:not(.CalendarDay__selected_span) {
+    pointer-events: none;
+    color: var(--disabled-color);
+}
+
+.CalendarDay__blocked_out_of_range:hover {
+    color: var(--calendar-day-font-color);
+    background: radial-gradient(20px circle at center, var(--calendar-blur-color) 40%, transparent 90%);
+    font-weight: 400;
+}
+
+/* Radio items */
+.sidebar-radioitems {
+    font: var(--base-font);
+    color: var(--sup-text-color);
+}
+
+.sidebar-radioitems label {
+    margin-right: 20px;
+}
+
+.sidebar-radioitems label input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--sup-text-color);
+    transition: 0.1s all linear;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.sidebar-radioitems label input:checked {
+    background: radial-gradient(6px circle at center, var(--weekend-color) 50%, transparent 55%);
+    border-color: var(--weekend-color);
+    box-shadow: 0 0 7px var(--main-blur-color);
+}
+
+.sidebar-radioitems label input:disabled {
+    border: 1px solid var(--disabled-color);
+    cursor: not-allowed;
+}
+
+.sidebar-radioitems label:has(> input:disabled) {
+    color: var(--disabled-color);
+}
+
+
+/* Dropdown list */
+.Select-control {
+    width: 100%;
+    height: 40px;
+    background-color: var(--card-bg-color);
+    color: var(--sup-text-color);
+    border: none;
+    border-bottom: thin solid var(--sup-text-color);
+}
+
+.Select.is-open > .Select-control {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--sup-text-color);
+}
+
+.Select.is-focused:not(.is-open) > .Select-control {
+    border: none;
+    box-shadow: 2px 2px 5px var(--main-blur-color);
+}
+
+.Select-menu-outer {
+    background-color: var(--card-bg-color);
+    color: var(--sup-text-color);
+    border-color: var(--sup-text-color);
+    max-height: 105px;
+    overflow-y: scroll;
+}
+
+.VirtualizedSelectFocusedOption {
+    background-color: var(--select-item-color);
+}
+
+.Select-placeholder {
+    color: var(--sup-text-color);
+}
+
+.Select--multi .Select-value {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--weekend-color);
+    color: var(--sup-text-color);
+    font: 400 14px "Roboto", sans-serif;
+}
+
+.Select--multi .Select-value-icon {
+    border-right: 1px solid var(--weekend-color);
+}
+
+.Select--multi .Select-value-icon:hover {
+    color: var(--weekend-color);
+}
+
+.Select--multi .Select-value-label {
+    padding: 3px 5px;
+}
+
+.Select-arrow-zone {
+    padding-right: 10px;
+}
+
+.Select-arrow {
+    border-color: var(--sup-text-color) transparent transparent;
+}
+
+.Select-clear-zone {
+    color: var(--sup-text-color);
+}
+
+.Select-clear-zone:hover {
+    color: var(--workweek-color);
+}
+
+/* Buttons */
+#sidebar-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.sidebar-button {
+    height: 40px;
+    width: 90px;
+    border-radius: 5px;
+    border: 1px solid var(--weekend-color);
+    font: 500 16px "Roboto", sans-serif;
+    cursor: pointer;
+}
+
+.sidebar-button:hover {
+    transform: scale(1.05);
+    box-shadow: 1px 1px 2px var(--main-blur-color);
+}
+
+#submit-button {
+    background-color: var(--weekend-color);
+    color: var(--calendar-day-font-color);
+}
+
+#clear-button {
+    background-color: var(--card-bg-color);
+    color: var(--sup-text-color);
+}
+
+/* Error message */
+#sidebar-error {
+    width: 100%;
+    height: auto;
+}
+
+#error-message {
+    color: var(--error-color);
+    padding: 10px 0 0 0;
+    display: block;
+}

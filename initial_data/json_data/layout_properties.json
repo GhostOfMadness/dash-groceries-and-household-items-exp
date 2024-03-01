@@ -1,48 +1,116 @@
 {
+    "sidebar": {
+        "items": [
+            {
+                "label": "Date Range",
+                "object_class": "DatePickerRange",
+                "object_prop": {
+                    "id": "date-picker-range",
+                    "start_date_placeholder_text": "2021-02-13",
+                    "end_date_placeholder_text": "2022-07-01",
+                    "start_date": "2021-02-13",
+                    "end_date": "2022-07-01",
+                    "min_date_allowed": "2021-02-13",
+                    "max_date_allowed": "2022-07-01",
+                    "display_format": "YYYY-MM-DD",
+                    "month_format": "YYYY-MM",
+                    "first_day_of_week": 1,
+                    "minimum_nights": 0,
+                    "updatemode": "singledate"
+                }
+            },
+            {
+                "label": "Date Range Type",
+                "object_class": "RadioItems",
+                "object_prop": {
+                    "className": "sidebar-radioitems",
+                    "id": "date-range-type",
+                    "inline": true
+                }
+            },
+            {
+                "label": "Item Type",
+                "object_class": "RadioItems",
+                "object_prop": {
+                    "className": "sidebar-radioitems",
+                    "id": "item-type",
+                    "inline": true
+                }
+            },
+            {
+                "label": "Item Category",
+                "object_class": "Dropdown",
+                "object_prop": {
+                    "id": "item-category",
+                    "multi": true
+                }
+            },
+            {
+                "label": "Item Name",
+                "object_class": "Dropdown",
+                "object_prop": {
+                    "id": "item-name",
+                    "multi": true
+                }
+            }
+        ],
+        "buttons": [
+            {
+                "label": "Submit",
+                "btn_id": "submit-button"
+            },
+            {
+                "label": "Clear",
+                "btn_id": "clear-button"
+            }
+        ]
+    },
     "plot_summary": {
         "figure_1": [
             {
                 "label": "days",
                 "icon_name": "sum_days.svg",
-                "id": "sum_days"
+                "item_id": "sum-days"
             },
             {
                 "label": "per day",
                 "icon_name": "sum_per_day.svg",
-                "id": "sum_per_day"
+                "item_id": "sum-per-day"
             },
             {
                 "label": "per day per person",
                 "icon_name": "sum_per_day_per_person.svg",
-                "id": "sum_per_day_per_person"
+                "item_id": "sum-per-day-per-person"
             },
             {
                 "label": "maximum spending",
                 "icon_name": "sum_maximum_spending.svg",
-                "id": "sum_max_spending"
+                "item_id": "sum-max-spending"
             },
             {
                 "label": "minimum spending",
                 "icon_name": "sum_minimum_spending.svg",
-                "id": "sum_min_spending"
+                "item_id": "sum-min-spending"
             }
         ]
     },
-    "contacts": [
-        {
-            "alt": "Email icon",
-            "img_name": "contacts-mail.svg",
-            "href": "mailto: GhostofMadnessNN@yandex.ru"
-        },
-        {
-            "alt": "Github icon",
-            "img_name": "contacts-github.svg",
-            "href": "https://github.com/GhostOfMadness"
-        },
-        {
-            "alt": "Telegram icon",
-            "img_name": "contacts-telegram.svg",
-            "href": "https://t.me/GhostOfMadness"
-        }
-    ]
+    "footer": {
+        "contacts": [
+            {
+                "alt": "Email icon",
+                "img_name": "contacts-mail.svg",
+                "href": "mailto: GhostofMadnessNN@yandex.ru"
+            },
+            {
+                "alt": "Github icon",
+                "img_name": "contacts-github.svg",
+                "href": "https://github.com/GhostOfMadness"
+            },
+            {
+                "alt": "Telegram icon",
+                "img_name": "contacts-telegram.svg",
+                "href": "https://t.me/GhostOfMadness"
+            }
+        ]
+    }
 }

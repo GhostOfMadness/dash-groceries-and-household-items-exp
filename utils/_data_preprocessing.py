@@ -53,8 +53,8 @@ class DataFileHandler:
     UNNECESSARY_LAST_ROWS_COUNT: ClassVar[int] = 2
     UNNECESSARY_FIRST_COLS_COUNT: ClassVar[int] = 4
 
-    FOOD_TYPE_NAME: ClassVar[str] = 'Foodstuff'
-    NON_FOOD_TYPE_NAME: ClassVar[str] = 'Household'
+    FOOD_TYPE_NAME: ClassVar[str] = 'foodstuff'
+    NON_FOOD_TYPE_NAME: ClassVar[str] = 'household'
     NON_FOOD_CATEGORIES: ClassVar[tuple[str]] = (
         'Cat supplies',
         'Household items',
@@ -233,25 +233,22 @@ class DataFileHandler:
         self.__delete_zero_rows()
         self.__translate_index()
 
-    def __create_cat_item_map(self) -> dict[str, list]:
+    def __create_item_cat_map(self) -> dict[str, list]:
         """Create dict to link a category to the corresponding item names."""
-        cat_item_map = {}
+        item_cat_map = {}
         for cat, item in self.df.index:
-            cat_item_map.setdefault(cat, []).append(item)
-        return cat_item_map
+            item_cat_map[item] = cat
+        return item_cat_map
 
-    def __create_type_category_map(self) -> dict[str, list]:
+    def __create_category_type_map(self) -> dict[str, list]:
         """Create dict to link a type to the corresponding categories."""
-        type_cat_map = {
-            self.FOOD_TYPE_NAME: [],
-            self.NON_FOOD_TYPE_NAME: [],
-        }
+        cat_type_map = {}
         for cat in self.df.index.get_level_values(0).unique():
             if cat in self.NON_FOOD_CATEGORIES:
-                type_cat_map[self.NON_FOOD_TYPE_NAME].append(cat)
+                cat_type_map[cat] = self.NON_FOOD_TYPE_NAME
             else:
-                type_cat_map[self.FOOD_TYPE_NAME].append(cat)
-        return type_cat_map
+                cat_type_map[cat] = self.FOOD_TYPE_NAME
+        return cat_type_map
 
     def __create_new_index(self, current_idx: str):
         """Create tuple (date type, timestamp) for new index."""
@@ -284,7 +281,7 @@ class DataFileHandler:
             getattr(self, initial_df_attr).iloc[:, start_col_idx::2].T.values,
             columns=getattr(self, initial_df_attr).index.get_level_values(1),
             index=pd.MultiIndex.from_tuples(df_idx),
-        )
+        ).sort_index()
 
     def generate_tables(self):
         """
@@ -310,8 +307,9 @@ class DataFileHandler:
                 self.df.loc[:, ::2].columns,
             ),
         )
-        self.cat_item_map = self.__create_cat_item_map()
-        self.type_cat_map = self.__create_type_category_map()
+
+        self.item_cat_map = self.__create_item_cat_map()
+        self.cat_type_map = self.__create_category_type_map()
         self.cost = self.__create_final_dataframe(
             df_idx=dt_idxs,
             initial_df_attr='df',

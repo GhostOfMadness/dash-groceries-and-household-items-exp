@@ -1,16 +1,15 @@
-from datetime import datetime as dt
-from datetime import timedelta
+import json
+from typing import Any
 
 import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-from dash import Dash, dcc, html
+from dash import Dash, Input, Output, State, html
+from dash.exceptions import PreventUpdate
 
+from utils import callback_utils
 from utils._data_preprocessing import DataFileHandler
 from utils._layout_constructor import LayoutConstructor
 
 app = Dash(
-    __name__,
     meta_tags=[
         {'name': 'author', 'content': 'Daria Ovechkina'},
         {'name': 'description', 'content': 'Presonal expenses overview'},
@@ -22,277 +21,245 @@ app = Dash(
 data_handler = DataFileHandler()
 data_handler.generate_tables()
 
-data = data_handler.cost.sum(1)
-start = dt.strptime('2021-06-01', '%Y-%m-%d')
-end = dt.strptime('2022-05-15', '%Y-%m-%d')
-weekend_cond = (
-    (data.index.get_level_values(0) == 'weekend')
-    & (data.index.get_level_values(1) >= start)
-    & (data.index.get_level_values(1) <= end)
-)
-not_weekend_cond_1 = (
-    (data.index.get_level_values(0) == 'weekend')
-    & (data.index.get_level_values(1) < start)
-)
-not_weekend_cond_2 = (
-    (data.index.get_level_values(0) == 'weekend')
-    & (data.index.get_level_values(1) > end)
-)
-workweek_cond = (
-    (data.index.get_level_values(0) == 'workweek')
-    & (data.index.get_level_values(1) >= start)
-    & (data.index.get_level_values(1) <= end)
-)
-not_workweek_cond_1 = (
-    (data.index.get_level_values(0) == 'workweek')
-    & (data.index.get_level_values(1) < start)
-)
-not_workweek_cond_2 = (
-    (data.index.get_level_values(0) == 'workweek')
-    & (data.index.get_level_values(1) > end)
-)
-# weekend_cond = data.index.get_level_values(0) == 'weekend'
-# workweek_cond = data.index.get_level_values(0) == 'workweek'
+active_days = data_handler.cost.index.get_level_values(1)
+start_date = active_days[0]
+end_date = active_days[-1]
+all_days = pd.date_range(start=start_date, end=end_date)
+disabled_days = all_days[~all_days.isin(active_days)]
+
+layout_bulder = LayoutConstructor(disabled_days=disabled_days)
+app.layout = layout_bulder.create_layout()
 
 
-dates = pd.date_range(
-    start=data.index.get_level_values(1)[0],
-    end=data.index.get_level_values(1)[-1],
-    freq='MS',
+@app.callback(
+    Output('date-range-type', 'options'),
+    Output('date-range-type', 'value'),
+    Input('date-picker-range', 'start_date'),
+    Input('date-picker-range', 'end_date'),
 )
-year_start = [
-    dt for idx, dt in enumerate(dates)
-    if idx == 0 or dates[idx - 1].year != dt.year
-]
+def set_date_range_type_options(
+    start_date: str,
+    end_date: str,
+) -> tuple[list[dict[str, Any]], str | None]:
+    """Set date range type radio items."""
+    range_types = callback_utils.get_data_slice(
+        df=data_handler.cost,
+        date_range=(start_date, end_date),
+    ).index.get_level_values(0)
+    return callback_utils.set_radio_options(
+        option1='workweek',
+        option2='weekend',
+        types_list=range_types,
+    )
 
 
-def xaxis_tick_text(idx_date, year_start):
-    tick_text = idx_date.strftime('%b').capitalize()
-    if idx_date in year_start:
-        tick_text += f'<br>{idx_date.year}'
-    return tick_text
-
-
-fig = go.Figure()
-fig.add_trace(go.Scatter(
-    x=data.loc[weekend_cond].index.get_level_values(1),
-    y=data[weekend_cond].values,
-    mode='lines+markers',
-    showlegend=False,
-    marker=dict(
-        color='rgb(100, 181, 246)',
-        size=4,
-    ),
-    line=dict(
-        color='rgb(100, 181, 246)',
-        width=1.2,
-    ),
-    hoverlabel=dict(
-        font_size=16,
-        font_family='Source Sans Pro, sans-serif',
-        bgcolor='rgb(30, 30, 30)',
-        bordercolor='rgb(100, 181, 246)',
-        font_color='#bdbdbd',
-    ),
-    hovertemplate=(
-        '<b> %{y:.2f} rub.</b><extra></extra> '
-        '<br>'
-        ' for <i>%{x|%Y-%m-%d}</i> '
-    ),
-))
-fig.add_trace(go.Scatter(
-    x=data[not_weekend_cond_1].index.get_level_values(1),
-    y=data[not_weekend_cond_1].values,
-    mode='lines',
-    showlegend=False,
-    line=dict(
-        color='rgba(100, 181, 246, 0.5)',
-        width=1.2,
-        dash='3px',
-    ),
-    hoverinfo='skip',
-))
-fig.add_trace(go.Scatter(
-    x=data[not_weekend_cond_2].index.get_level_values(1),
-    y=data[not_weekend_cond_2].values,
-    mode='lines',
-    showlegend=False,
-    line=dict(
-        color='rgba(100, 181, 246, 0.5)',
-        width=1.2,
-        dash='3px',
-    ),
-    hoverinfo='skip',
-))
-fig.add_trace(go.Scatter(
-    x=data[workweek_cond].index.get_level_values(1),
-    y=data[workweek_cond].values,
-    mode='lines+markers',
-    showlegend=False,
-    marker=dict(
-        color='rgb(246, 166, 100)',
-        size=4,
-    ),
-    line=dict(
-        color='rgb(246, 166, 100)',
-        width=1.2,
-    ),
-    customdata=[data.index[data.index.get_loc(('workweek', date_idx)) - 1][1] + timedelta(days=1) for date_idx in data[workweek_cond].index.get_level_values(1)],
-    hoverlabel=dict(
-        font_size=16,
-        font_family='Source Sans Pro, sans-serif',
-        bgcolor='rgb(30, 30, 30)',
-        bordercolor='rgb(246, 166, 100)',
-        font_color='#bdbdbd',
-    ),
-    hovertemplate=(
-        '<b> %{y:.2f} rub.</b><extra></extra> '
-        '<br>'
-        ' for <i>%{customdata|%Y-%m-%d}</i> - <i>%{x|%Y-%m-%d}</i> '
-    ),
-))
-fig.add_trace(go.Scatter(
-    x=data[not_workweek_cond_1].index.get_level_values(1),
-    y=data[not_workweek_cond_1].values,
-    mode='lines',
-    showlegend=False,
-    line=dict(
-        color='rgba(246, 166, 100, 0.5)',
-        width=1.2,
-        dash='3px',
-    ),
-    hoverinfo='skip',
-))
-fig.add_trace(go.Scatter(
-    x=data[not_workweek_cond_2].index.get_level_values(1),
-    y=data[not_workweek_cond_2].values,
-    mode='lines',
-    showlegend=False,
-    line=dict(
-        color='rgba(246, 166, 100, 0.5)',
-        width=1.2,
-        dash='3px',
-    ),
-    hoverinfo='skip',
-))
-fig.add_trace(go.Scatter(
-    x=[None],
-    y=[None],
-    mode='markers',
-    marker=dict(
-        color='rgb(100, 181, 246)',
-        size=10,
-        symbol='square',
-    ),
-    name='Weekend',
-))
-fig.add_trace(go.Scatter(
-    x=[None],
-    y=[None],
-    mode='markers',
-    marker=dict(
-        color='rgb(246, 166, 100)',
-        size=10,
-        symbol='square',
-    ),
-    name='Workweek',
-))
-fig.update_xaxes(
-    title='Date',
-    title_font=dict(
-        size=16,
-        family='Source Sans Pro, sans-serif',
-        color='#eeeeee',
-    ),
-    title_standoff=10,
-    ticks='outside',
-    tickwidth=1,
-    tickcolor='#eeeeee',
-    ticklen=5,
-    showgrid=False,
-    linecolor='#eeeeee',
-    linewidth=1,
-    # tickvals=dates,
-    # ticktext=[xaxis_tick_text(idx, year_start) for idx in dates],
-    tickfont=dict(color='#eeeeee', size=14, family='Source Sans Pro, sans-serif'),
-    # range=['2021-01-13 00:04:35.2594', '2022-07-31 23:55:24.7406'],
-    range=['2021-02-05', '2022-07-10'],
-    dtick='M1',
-    tickformat='%b\n%Y',
+@app.callback(
+    Output('item-type', 'options'),
+    Output('item-type', 'value'),
+    Input('date-range-type', 'value'),
+    State('date-picker-range', 'start_date'),
+    State('date-picker-range', 'end_date'),
 )
-fig.update_yaxes(
-    title='Total, ₽',
-    title_font=dict(
-        size=16,
-        family='Source Sans Pro, sans-serif',
-        color='#eeeeee',
-    ),
-    linecolor='#eeeeee',
-    linewidth=1,
-    ticks='outside',
-    tickwidth=1,
-    tickcolor='#eeeeee',
-    ticklen=5,
-    title_standoff=20,
-    gridwidth=1,
-    gridcolor='rgba(255, 255, 255, 0.16)',
-    tickfont=dict(color='#eeeeee', size=14, family='Source Sans Pro, sans-serif'),
-    tickformat=',.0f',
-    rangemode='nonnegative',
-)
-fig.update_layout(
-    plot_bgcolor='rgb(30, 30, 30)',
-    paper_bgcolor='rgb(30, 30, 30)',
-    margin=dict(l=0, r=0, b=0, t=0),
-    legend=dict(
-        font=dict(size=14, family='Source Sans Pro, sans-serif', color='#bdbdbd'),
-        itemclick=False,
-        itemdoubleclick=False,
-        orientation='h',
-        xanchor='right',
-        x=1,
-        yanchor='bottom',
-        y=1,
-    ),
-)
+def set_item_type_options(
+    range_type: str | None,
+    start_date: str,
+    end_date: str,
+) -> tuple[list[dict[str, Any]], str | None]:
+    """Set item type radio items."""
+    items = callback_utils.get_data_slice(
+        df=data_handler.cost,
+        date_range=(start_date, end_date),
+        date_range_type=range_type,
+    ).columns.tolist()
+    item_types = [
+        data_handler.cat_type_map[data_handler.item_cat_map[item]]
+        for item in items
+    ]
+    return callback_utils.set_radio_options(
+        option1='foodstuff',
+        option2='household',
+        types_list=item_types,
+    )
 
-# full_fig = fig.full_figure_for_development()
-# print(full_fig.layout.xaxis.range)
-# fig = px.line(
-#     data,
-#     x=data.index,
-#     y='sum',
-#     color='level_0',
-#     color_discrete_map={
-#         'weekend': 'rgb(100, 181, 246)',
-#         'workweek': 'rgb(246, 166, 100)',
-#     },
-#     markers=True,
-# )
-# fig.update_traces(
-#     line=dict(width=1),
-#     marker=dict(size=4),
-# )
-# fig.update_layout(
-#     plot_bgcolor='rgb(30, 30, 30)',
-#     paper_bgcolor='rgb(30, 30, 30)',
-# )
 
-# app.layout = html.Div(
-#     [
-#         html.H4('Total expenses'),
-#         html.Div(
-#             dcc.Graph(
-#                 figure=fig,
-#                 config={'displayModeBar': False},
-#                 style={'width': '100%', 'height': '100%'},
-#             ),
-#             className='graph-container',
-#         ),
-#     ],
-#     className='card',
-# )
-app.layout = LayoutConstructor().create_layout()
+@app.callback(
+    Output('item-category', 'options'),
+    Input('item-type', 'value'),
+    State('date-picker-range', 'start_date'),
+    State('date-picker-range', 'end_date'),
+    State('date-range-type', 'value'),
+)
+def set_item_category_options(
+    item_types: str | None,
+    start_date: str,
+    end_date: str,
+    range_type: str | None,
+) -> list[str]:
+    """Set item category dropdown list options."""
+    item_type_convert_map = {
+        None: [],
+        'all': ['foodstuff', 'household'],
+        'foodstuff': ['foodstuff'],
+        'household': ['household'],
+    }
+    item_types = item_type_convert_map[item_types]
+    return callback_utils.set_dropdown_options(
+        df=data_handler.cost,
+        date_range=(start_date, end_date),
+        date_range_type=range_type,
+        parent_value=item_types,
+        item_cat_map=data_handler.item_cat_map,
+        cat_type_map=data_handler.cat_type_map,
+    )
+
+
+@app.callback(
+    Output('item-category', 'value'),
+    Input('item-type', 'value'),
+    Input('item-category', 'value'),
+)
+def set_item_category_value(item_types, current_value):
+    return callback_utils.correct_dropdown_value(
+        parent_comp_id='item-type',
+        parent_value=item_types,
+        current_value=current_value,
+    )
+
+
+@app.callback(
+    Output('item-name', 'options'),
+    Input('item-category', 'value'),
+    State('date-picker-range', 'start_date'),
+    State('date-picker-range', 'end_date'),
+    State('date-range-type', 'value'),
+)
+def set_item_name_options(
+    item_cats: list[str] | None,
+    start_date: str,
+    end_date: str,
+    range_type: str | None,
+) -> list[str]:
+    """Set item name dropdown list options."""
+    if item_cats and item_cats[0] == 'All':
+        item_cats = list(set(data_handler.item_cat_map.values()))
+    return callback_utils.set_dropdown_options(
+        df=data_handler.cost,
+        date_range=(start_date, end_date),
+        date_range_type=range_type,
+        parent_value=item_cats,
+        item_cat_map=data_handler.item_cat_map,
+        cat_type_map=data_handler.cat_type_map,
+        is_item_options=True,
+    )
+
+
+@app.callback(
+    Output('item-name', 'value'),
+    Input('item-category', 'value'),
+    Input('item-name', 'value'),
+)
+def set_item_name_value(item_cats, current_value):
+    return callback_utils.correct_dropdown_value(
+        parent_comp_id='item-category',
+        parent_value=item_cats,
+        current_value=current_value,
+    )
+
+
+@app.callback(
+    Output('sidebar-error', 'children'),
+    Input('submit-button', 'n_clicks'),
+    State('date-picker-range', 'start_date'),
+    State('date-picker-range', 'end_date'),
+    State('item-category', 'value'),
+    State('item-name', 'value'),
+)
+def show_sidebar_error(
+    n_clicks: int | None,
+    start_date: str,
+    end_date: str,
+    categories: list[str] | None,
+    items: list[str] | None,
+) -> html.Span | None:
+    """
+    Show error message if the input is invalid.
+
+    The input is invalid if the start date goes before the end date
+    or no categories or items have been selected.
+    """
+    if not n_clicks:
+        raise PreventUpdate
+
+    error_name_mask_map = {
+        'invalid-date-range': (
+            pd.to_datetime(start_date) > pd.to_datetime(end_date)
+        ),
+        'invalid-categories': not categories,
+        'invalid-items': not items,
+    }
+    error_messages = json.load(open('app_text_values.json'))['errors']
+    for error in error_messages:
+        if error_name_mask_map[error['name']]:
+            return layout_bulder.sidebar_builder.set_sidebar_error(
+                error['message'],
+            )
+
+
+@app.callback(
+    Output('date-picker-range', 'start_date'),
+    Output('date-picker-range', 'end_date'),
+    Input('clear-button', 'n_clicks'),
+)
+def clear_sidebar_input(n_clicks: int | None) -> tuple[pd.Timestamp]:
+    """Return input values to the default ones when click on 'Clear' button."""
+    return start_date, end_date
+
+
+@app.callback(
+    Output('working-input', 'data'),
+    Input('submit-button', 'n_clicks'),
+    State('date-picker-range', 'start_date'),
+    State('date-picker-range', 'end_date'),
+    State('date-range-type', 'value'),
+    State('item-category', 'value'),
+    State('item-name', 'value'),
+)
+def save_user_settings(
+    n_clicks: int | None,
+    start_date: str,
+    end_date: str,
+    range_type: str | None,
+    categories: list[str] | None,
+    items: list[str] | None,
+):
+    """Save user input values."""
+    error_mask = (
+        pd.to_datetime(start_date) > pd.to_datetime(end_date)
+        or not categories
+        or not items
+    )
+    if error_mask and n_clicks:
+        raise PreventUpdate
+
+    user_settings = {
+        'start_date': start_date,
+        'end_date': end_date,
+        'range_type': range_type,
+        'categories': categories,
+        'items': items,
+    }
+    return json.dumps(user_settings)
+
+
+@app.callback(
+    Output('sum-days', 'children'),
+    Input('working-input', 'data'),
+)
+def update_sum_days(working_data):
+    data = json.loads(working_data)
+    print(data)
+    return 1
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
