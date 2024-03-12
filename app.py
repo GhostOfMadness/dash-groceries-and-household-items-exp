@@ -8,6 +8,7 @@ from dash.exceptions import PreventUpdate
 from utils import callback_utils
 from utils._data_preprocessing import DataFileHandler
 from utils._layout_constructor import LayoutConstructor
+from utils._linear_plot_constructor import LinearPlot
 
 app = Dash(
     meta_tags=[
@@ -145,7 +146,10 @@ def set_item_name_options(
     if not item_cats:
         item_cats = []
     if item_cats and item_cats[0] == 'All':
-        item_cats = categories[1:]
+        if not categories:
+            item_cats = list(set(data_handler.item_cat_map.values()))
+        else:
+            item_cats = categories[1:]
     return callback_utils.set_dropdown_options(
         df=data_handler.cost,
         date_range=(start_date, end_date),
@@ -303,6 +307,29 @@ def update_summaries(user_settings: str) -> int:
         f'₽ {max_cost:,.2f}'.replace(',', ' '),
         f'₽ {min_cost:,.2f}'.replace(',', ' '),
     )
+
+
+@app.callback(
+    Output('total-expenses', 'figure'),
+    Input('working-input', 'data'),
+)
+def set_total_expenses_figure(user_settings):
+    """Set total expenses plot."""
+    user_data = json.loads(user_settings)
+    items = user_data['items']
+    if not items:
+        cost = data_handler.cost.sum(1)
+    else:
+        cost = data_handler.cost.loc[:, items].sum(1)
+
+    linear_plot_builder = LinearPlot(
+        df=cost,
+        user_settings=user_data,
+        fig_name='total_expenses',
+        yaxis_title='Total, ₽',
+        end_start_map=data_handler.end_start_map,
+    )
+    return linear_plot_builder.create_figure()
 
 
 if __name__ == '__main__':

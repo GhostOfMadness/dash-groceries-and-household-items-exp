@@ -175,6 +175,43 @@ class LayoutConstructor(BaseLayout):
             className='card summary-item',
         )
 
+    def __set_summary(
+        self,
+        fig_id: str,
+        orientation: str,
+    ) -> html.Div:
+        """Set summary container for the given figure."""
+        return html.Div(
+            [
+                self.__set_summary_item(**item)
+                for item in self.LAYOUT_PROP['plot_summary'][fig_id]
+            ],
+            className='summary-aside ' + orientation,
+            id=fig_id + '_summary',
+        )
+
+    def __set_figure(
+        self,
+        fig_name: str,
+        fig_id: str,
+    ) -> html.Div:
+        """Set the figure container."""
+        return html.Div(
+            [
+                html.Span(fig_name, className='figure-title'),
+                html.Div(
+                    dcc.Graph(
+                        id=fig_id,
+                        config={'displayModeBar': False},
+                        style={'height': '100%'},
+                    ),
+                    className='figure-container',
+                ),
+            ],
+            className='card custom-plot',
+            id=fig_id + '-container',
+        )
+
     def __set_main(self) -> html.Main:
         """Set main block to the layout."""
         return html.Main(
@@ -183,14 +220,13 @@ class LayoutConstructor(BaseLayout):
                 html.Div(
                     [
                         self.sidebar_builder.set_sidebar(),
-                        html.Div(className='card linear-plot', id='figure-1'),
-                        html.Div(
-                            [
-                                self.__set_summary_item(**item)
-                                for item in self.LAYOUT_PROP['plot_summary']['figure_1']
-                            ],
-                            className='summary-aside',
-                            id='figure-1-summary',
+                        self.__set_figure(
+                            fig_name='Total expenses',
+                            fig_id='total-expenses',
+                        ),
+                        self.__set_summary(
+                            fig_id='total_expenses',
+                            orientation='vertical',
                         ),
                     ],
                     id='first-row-container',

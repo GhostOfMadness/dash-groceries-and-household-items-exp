@@ -1,6 +1,6 @@
 import json
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path, PosixPath
 from typing import ClassVar
 
@@ -11,18 +11,20 @@ class DataFileHandler:
     """
     Handle the initial data file.
 
-    Use `generate_tables` to create 6 data structures
+    Use `generate_tables` to create 7 data structures
     that are accessible as an object attributes:
-    - type_cat_map - python `dict` that links an item type
-    to the list of corresponding item categories.
-    - cat_item_map - python `dict` that links an item category
-    to the list of corresponding item names.
+    - end_start_map - python `dict` that links dataframe index
+      (the end of the period) to the start of the period.
+    - cat_type_map - python `dict` that links an item category
+      to the corresponding item type.
+    - item_cat_map - python `dict` that links an item
+      to the corresponding item category.
     - cost - `pd.DataFrame` with cost of each item per period.
     - cost_others - `pd.DataFrame` with cost of each 'Other expenses' item
-    per period.
+      per period.
     - quantity - `pd.DataFrame` with quantity of each item per period.
     - quantity_others - `pd.DataFrame` with quantity of each 'Other expenses'
-    item per period.
+      item per period.
     """
 
     APP_DIR: ClassVar[PosixPath] = Path(__file__).parent.parent
@@ -258,6 +260,23 @@ class DataFileHandler:
             return ('weekend', idx_timestamp)
         return ('workweek', idx_timestamp)
 
+    def __create_end_start_date_map(
+        self,
+        dt_idxs: list[tuple[str, pd.Timestamp]],
+    ) -> dict[tuple[str, pd.Timestamp], pd.Timestamp]:
+        """
+        Create dict to link the end of the interval to its start.
+
+        A start of an interval is the first day after the previous
+        interval ending. For weekend intervals the start and the end
+        are the same.
+        """
+        end_start_map = {dt_idxs[0]: dt_idxs[0][1]}
+        for i, idx in enumerate(dt_idxs[1:], 1):
+            start_date = dt_idxs[i - 1][1] + timedelta(days=1)
+            end_start_map[idx] = start_date
+        return end_start_map
+
     def __create_final_dataframe(
         self,
         df_idx: list[datetime],
@@ -270,9 +289,9 @@ class DataFileHandler:
         Args:
         - df_idx - a `list` of timestamps to be used as the dataframe index.
         - initial_df_attr - a name of the initial dataframe from which
-        the new one shoud be created.
+          the new one shoud be created.
         - is quantity_df - a bool value to create either cost or quantity
-        dataframe.
+          dataframe.
 
         Item names are used as column names, categories are ignored.
         """
@@ -287,17 +306,19 @@ class DataFileHandler:
         """
         Generate clear data to be used in the app.
 
-        Create 6 data structures as the object attributes:
-        - type_cat_map - python `dict` that links an item type
-        to the list of corresponding item categories.
-        - cat_item_map - python `dict` that links an item category
-        to the list of corresponding item names.
+        Create 7 data structures as the object attributes:
+        - end_start_map - python `dict` that links dataframe index
+          (the end of the period) to the start of the period.
+        - cat_type_map - python `dict` that links an item category
+          to the corresponding item type.
+        - item_cat_map - python `dict` that links an item
+          to the corresponding item category.
         - cost - `pd.DataFrame` with cost of each item per period.
         - cost_others - `pd.DataFrame` with cost of each 'Other expenses'
-        item per period.
+          item per period.
         - quantity - `pd.DataFrame` with quantity of each item per period.
         - quantity_others - `pd.DataFrame` with quantity of each
-        'Other expenses' item per period.
+          'Other expenses' item per period.
         """
         self.__data_preprocess()
 
@@ -308,6 +329,7 @@ class DataFileHandler:
             ),
         )
 
+        self.end_start_map = self.__create_end_start_date_map(dt_idxs)
         self.item_cat_map = self.__create_item_cat_map()
         self.cat_type_map = self.__create_category_type_map()
         self.cost = self.__create_final_dataframe(

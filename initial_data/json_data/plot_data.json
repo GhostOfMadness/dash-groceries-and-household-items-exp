@@ -1,0 +1,25 @@
+{
+    "fonts": {
+        "axes-title": {
+            "size": 16,
+            "family": "Source Sans Pro, sans-serif"
+        },
+        "hoverlabel": {
+            "size": 16,
+            "family": "Source Sans Pro, sans-serif"
+        },
+        "ticks": {
+            "size": 14,
+            "family": "Source Sans Pro, sans-serif"
+        }
+    },
+    "colors": {
+        "bg": "rgb(30, 30, 30)",
+        "sup-text": "rgb(189, 189, 189)",
+        "main-text": "rgb(238, 238, 238)",
+        "weekend": "rgb(100, 181, 246)",
+        "weekend-out-of-range": "rgbs(100, 181, 246, 0.5)",
+        "workweek": "rgb(246, 166, 100)",
+        "workweek-out-of-range": "rgba(246, 166, 100, 0.5)"
+    }
+}

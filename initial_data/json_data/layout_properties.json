@@ -66,7 +66,7 @@
         ]
     },
     "plot_summary": {
-        "figure_1": [
+        "total_expenses": [
             {
                 "label": "days",
                 "icon_name": "sum_days.svg",
