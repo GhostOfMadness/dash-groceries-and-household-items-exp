@@ -204,6 +204,7 @@ class LayoutConstructor(BaseLayout):
                         id=fig_id,
                         config={'displayModeBar': False},
                         style={'height': '100%'},
+                        clear_on_unhover=True,
                     ),
                     className='figure-container',
                 ),
@@ -230,6 +231,37 @@ class LayoutConstructor(BaseLayout):
                         ),
                     ],
                     id='first-row-container',
+                ),
+                html.Div(
+                    [
+                        html.Div(
+                            [
+                                self.__set_figure(
+                                    fig_name='Item count',
+                                    fig_id='item-count',
+                                ),
+                                self.__set_summary(
+                                    fig_id='item_count',
+                                    orientation='horizontal',
+                                ),
+                            ],
+                            className='figure-summary-h',
+                        ),
+                        html.Div(
+                            [
+                                self.__set_figure(
+                                    fig_name='Median item cost',
+                                    fig_id='median-item-cost',
+                                ),
+                                self.__set_summary(
+                                    fig_id='median_cost',
+                                    orientation='horizontal',
+                                ),
+                            ],
+                            className='figure-summary-h',
+                        ),
+                    ],
+                    id='third-row-container',
                 ),
             ],
         )

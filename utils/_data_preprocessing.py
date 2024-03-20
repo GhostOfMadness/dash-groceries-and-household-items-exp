@@ -236,14 +236,14 @@ class DataFileHandler:
         self.__translate_index()
 
     def __create_item_cat_map(self) -> dict[str, list]:
-        """Create dict to link a category to the corresponding item names."""
+        """Create dict to link an item to the corresponding category."""
         item_cat_map = {}
         for cat, item in self.df.index:
             item_cat_map[item] = cat
         return item_cat_map
 
     def __create_category_type_map(self) -> dict[str, list]:
-        """Create dict to link a type to the corresponding categories."""
+        """Create dict to link a category to the corresponding type."""
         cat_type_map = {}
         for cat in self.df.index.get_level_values(0).unique():
             if cat in self.NON_FOOD_CATEGORIES:

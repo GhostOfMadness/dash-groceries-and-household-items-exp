@@ -1,14 +1,16 @@
 import json
 from typing import Any
 
+import numpy as np
 import pandas as pd
-from dash import Dash, Input, Output, State, html
+import plotly.graph_objects as go
+from dash import Dash, Input, Output, State, html, ctx
 from dash.exceptions import PreventUpdate
 
 from utils import callback_utils
 from utils._data_preprocessing import DataFileHandler
 from utils._layout_constructor import LayoutConstructor
-from utils._linear_plot_constructor import LinearPlot
+from utils._linear_plot_constructor import LinearPlotBuilder
 
 app = Dash(
     meta_tags=[
@@ -30,6 +32,57 @@ disabled_days = all_days[~all_days.isin(active_days)]
 
 layout_bulder = LayoutConstructor(disabled_days=disabled_days)
 app.layout = layout_bulder.create_layout()
+
+
+def set_linear_figure(
+    user_settings: str,
+    fig_name: str,
+    yaxis_title: str,
+    neighbor_fig_id: str | None = None,
+    hover_data: dict[str, list[dict[str, Any]]] | None = None,
+) -> go.Figure:
+    """
+    Set a linear plot.
+
+    Slice the initial data by the user input, then handle the result
+    based on the figure name. If the hover data is not empty, change
+    the user date range to the hover point date. Create the linear plot.
+    If the plot contains only the hover point, add the annotation.
+    """
+    user_data = json.loads(user_settings)
+    slice_data = callback_utils.get_data_slice(
+        df=data_handler.cost,
+        items=user_data['items'],
+    )
+    fig_name_handler_map = {
+        'total_expenses': lambda x: x.sum(1),
+        'item_count': lambda x: (x != 0).sum(1),
+        'median_cost': lambda x: x[x != 0].median(axis=1).fillna(0),
+    }
+    working_data = fig_name_handler_map[fig_name](slice_data)
+
+    point_date = hover_data['points'][0]['x'] if hover_data else None
+    comp_id = ctx.triggered_id
+    hover_mask = (
+        neighbor_fig_id
+        and comp_id == neighbor_fig_id
+        and hover_data
+    )
+
+    if hover_mask:
+        user_data['start_date'] = point_date
+        user_data['end_date'] = point_date
+    plot_builder = LinearPlotBuilder(
+        df=working_data,
+        user_settings=user_data,
+        fig_name=fig_name,
+        yaxis_title=yaxis_title,
+        end_start_map=data_handler.end_start_map,
+    )
+    plot_builder.create_figure()
+    if hover_mask:
+        plot_builder.add_fig_annotation(point_x_coord=point_date)
+    return plot_builder.fig
 
 
 @app.callback(
@@ -279,6 +332,15 @@ def save_user_settings(
     Output('sum-per-day-per-person', 'children'),
     Output('sum-max-spending', 'children'),
     Output('sum-min-spending', 'children'),
+    Output('sum-total-items', 'children'),
+    Output('sum-most-common-item', 'children'),
+    Output('sum-most-common-item', 'title'),
+    Output('sum-median-per-period', 'children'),
+    Output('sum-median-item-cost', 'children'),
+    Output('sum-most-expensive-item', 'children'),
+    Output('sum-most-expensive-item', 'title'),
+    Output('sum-cheapest-item', 'children'),
+    Output('sum-cheapest-item', 'title'),
     Input('working-input', 'data'),
 )
 def update_summaries(user_settings: str) -> int:
@@ -300,12 +362,27 @@ def update_summaries(user_settings: str) -> int:
     max_cost = working_data.sum(axis=1).max()
     cost_per_day = total_cost / total_days
     cost_per_day_per_person = cost_per_day / 4
+    total_items = working_data.shape[1]
+    most_common_item = (working_data != 0).sum(0).idxmax()
+    items_median_per_period = np.median((working_data != 0).sum(1))
+    median_item_cost = working_data[working_data != 0].median().median()
+    most_expensive_item = working_data[working_data != 0].median().idxmax()
+    cheapest_item = working_data[working_data != 0].median().idxmin()
     return (
         total_days,
         f'₽ {cost_per_day:,.2f}'.replace(',', ' '),
         f'₽ {cost_per_day_per_person:,.2f}'.replace(',', ' '),
         f'₽ {max_cost:,.2f}'.replace(',', ' '),
         f'₽ {min_cost:,.2f}'.replace(',', ' '),
+        total_items,
+        most_common_item,
+        most_common_item,
+        f'{items_median_per_period:.0f}',
+        f'₽ {median_item_cost:,.2f}'.replace(',', ' '),
+        most_expensive_item,
+        most_expensive_item,
+        cheapest_item,
+        cheapest_item,
     )
 
 
@@ -313,23 +390,51 @@ def update_summaries(user_settings: str) -> int:
     Output('total-expenses', 'figure'),
     Input('working-input', 'data'),
 )
-def set_total_expenses_figure(user_settings):
-    """Set total expenses plot."""
-    user_data = json.loads(user_settings)
-    items = user_data['items']
-    if not items:
-        cost = data_handler.cost.sum(1)
-    else:
-        cost = data_handler.cost.loc[:, items].sum(1)
-
-    linear_plot_builder = LinearPlot(
-        df=cost,
-        user_settings=user_data,
+def set_total_expenses_figure(user_settings: str) -> go.Figure:
+    """Set the total expenses plot."""
+    return set_linear_figure(
+        user_settings=user_settings,
         fig_name='total_expenses',
         yaxis_title='Total, ₽',
-        end_start_map=data_handler.end_start_map,
     )
-    return linear_plot_builder.create_figure()
+
+
+@app.callback(
+    Output('item-count', 'figure'),
+    Input('working-input', 'data'),
+    Input('median-item-cost', 'hoverData'),
+)
+def set_item_count_figure(
+    user_settings: str,
+    hover_data: dict[str, list[dict[str, Any]]],
+) -> go.Figure:
+    """Set the item count plot."""
+    return set_linear_figure(
+        user_settings=user_settings,
+        hover_data=hover_data,
+        fig_name='item_count',
+        neighbor_fig_id='median-item-cost',
+        yaxis_title='Item count, unit',
+    )
+
+
+@app.callback(
+    Output('median-item-cost', 'figure'),
+    Input('working-input', 'data'),
+    Input('item-count', 'hoverData'),
+)
+def set_median_item_cost_figure(
+    user_settings: str,
+    hover_data: dict[str, Any],
+) -> go.Figure:
+    """Set the median item cost plot."""
+    return set_linear_figure(
+        user_settings=user_settings,
+        hover_data=hover_data,
+        fig_name='median_cost',
+        neighbor_fig_id='item-count',
+        yaxis_title='Median cost, ₽',
+    )
 
 
 if __name__ == '__main__':

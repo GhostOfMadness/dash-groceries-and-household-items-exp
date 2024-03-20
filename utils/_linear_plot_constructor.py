@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 
 @dataclass
-class BasePlot:
+class BasePlotBuilder:
     """Base figure class."""
 
     bg_color: str = 'rgb(30, 30, 30)'
@@ -21,12 +21,12 @@ class BasePlot:
     font_family: str = 'Source Sans Pro, sans-serif'
 
 
-class LinearPlot(BasePlot):
+class LinearPlotBuilder(BasePlotBuilder):
     """A linear plot constructor."""
 
     FIG_NAME_VALUE_FMT: dict[str, str] = {
         'total_expenses': '%{y:,.2f} rub.',
-        'item_count': '%{y:,.0f}',
+        'item_count': '%{y:,.0f} units',
         'median_cost': '%{y:,.2f} rub.',
     }
     RANGE_TYPE_START_DATE: dict[str, str] = {
@@ -60,6 +60,7 @@ class LinearPlot(BasePlot):
         self.fig_name = fig_name
         self.yaxis_title = yaxis_title
         self.end_start_map = end_start_map
+        self.fig = None
 
     def __set_data_filters(self, range_type: str) -> dict[str, np.ndarray]:
         """
@@ -274,7 +275,20 @@ class LinearPlot(BasePlot):
         )
 
     def _set_yaxis(self) -> go.layout.YAxis:
-        """Set the figure yaxis."""
+        """
+        Set the figure yaxis.
+
+        If axis max value is less or equal to 4, tick values are
+        defined as the integer range between min and max axis values.
+        This is necessary because tick values are rounded to integers
+        so some of them are duplicated on a small axis range.
+        """
+        add_prop = {}
+        max_y_value = self.df.max()
+        if max_y_value <= 4:
+            min_y_value = self.df.min()
+            add_prop['tickmode'] = 'array'
+            add_prop['tickvals'] = list(range(min_y_value, max_y_value + 1))
         return go.layout.YAxis(
             title_text=self.yaxis_title,
             title_standoff=20,
@@ -284,9 +298,11 @@ class LinearPlot(BasePlot):
             tickformat=',.0f',
             rangemode='nonnegative',
             **self.__set_base_axis_prop(),
+            **add_prop,
         )
 
     def _set_layout(self) -> go.Layout:
+        """Set the layout properties."""
         return go.Layout(
             plot_bgcolor=self.bg_color,
             paper_bgcolor=self.bg_color,
@@ -300,9 +316,52 @@ class LinearPlot(BasePlot):
             yaxis=self._set_yaxis(),
         )
 
-    def create_figure(self) -> go.Figure:
+    def __set_annotation_prop(self, range_type: str) -> dict[str, Any]:
+        """Set the annotation base properties."""
+        color: str = getattr(self, range_type + '_color')
+
+        return dict(
+            bgcolor=self.bg_color,
+            font=dict(
+                size=14,
+                color=self.main_text_color,
+                family=self.font_family,
+            ),
+            borderwidth=1,
+            bordercolor=color,
+            arrowcolor=color,
+            showarrow=True,
+            arrowhead=2,
+            arrowwidth=2,
+            arrowsize=0.8,
+        )
+
+    def create_figure(self) -> None:
         """Create a linear plot."""
-        return go.Figure(
+        self.fig = go.Figure(
             data=self._set_traces(),
             layout=self._set_layout(),
+        )
+
+    def add_fig_annotation(self, point_x_coord: str) -> None:
+        """Add an annotation to the figure point."""
+        if not self.fig:
+            raise ValueError(
+                'Please use the `create_figure()` method '
+                'before adding the annotation.',
+            )
+
+        point_row = self.df.loc[(slice(None), point_x_coord)]
+        point_y_coord = point_row.values[0]
+        point_range_type = point_row.index.get_level_values(0)[0]
+        annotation_template = (
+            '<b> '
+            + self.FIG_NAME_VALUE_FMT[self.fig_name][1:]
+            + ' </b>'
+        )
+        self.fig.add_annotation(
+            x=point_x_coord,
+            y=point_y_coord,
+            text=annotation_template.format(y=point_y_coord),
+            **self.__set_annotation_prop(range_type=point_range_type),
         )

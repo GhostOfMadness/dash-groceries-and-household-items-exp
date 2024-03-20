@@ -7,8 +7,9 @@ from dash import ctx
 
 def get_data_slice(
     df: pd.DataFrame,
-    date_range: Sequence[str],
+    date_range: Sequence[str] = ('2021-02-13', '2022-07-01'),
     date_range_type: str | None = None,
+    items: Sequence[str] | None = None,
 ) -> pd.DataFrame:
     """
     Slice the initial data.
@@ -19,7 +20,10 @@ def get_data_slice(
     if date_range_type is None or date_range_type == 'all':
         date_range_type = df.index.get_level_values(0).unique().tolist()
     df_slice = df.loc(axis=0)[date_range_type, slice(*date_range)]
-    return df_slice.loc[:, (df_slice != 0).any(axis=0)]
+    df_slice = df_slice.loc[:, (df_slice != 0).any(axis=0)]
+    if not items:
+        return df_slice
+    return df_slice.loc[:, items]
 
 
 def set_radio_options(
@@ -31,7 +35,8 @@ def set_radio_options(
     Set radio items options and pick the default value.
 
     Pick first option with `disabled=False` as default value.
-    If all options are disabled (when date range in invalid), return None.
+    If all options are disabled (when previous value in invalid),
+    return None.
     """
     option1_dis_cond = option1 not in types_list
     option2_dis_cond = option2 not in types_list

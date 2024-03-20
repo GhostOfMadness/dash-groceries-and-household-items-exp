@@ -92,6 +92,40 @@
                 "icon_name": "sum_minimum_spending.svg",
                 "item_id": "sum-min-spending"
             }
+        ],
+        "item_count": [
+            {
+                "label": "total items",
+                "icon_name": "sum_total_items.svg",
+                "item_id": "sum-total-items"
+            },
+            {
+                "label": "most common item",
+                "icon_name": "sum_most_common_item.svg",
+                "item_id": "sum-most-common-item"
+            },
+            {
+                "label": "median units per period",
+                "icon_name": "sum_median_per_period.svg",
+                "item_id": "sum-median-per-period"
+            }
+        ],
+        "median_cost": [
+            {
+                "label": "median item cost",
+                "icon_name": "sum_median_item_cost.svg",
+                "item_id": "sum-median-item-cost"
+            },
+            {
+                "label": "most expensive item",
+                "icon_name": "sum_most_expensive_item.svg",
+                "item_id": "sum-most-expensive-item"
+            },
+            {
+                "label": "cheapest item",
+                "icon_name": "sum_cheapest_item.svg",
+                "item_id": "sum-cheapest-item"
+            }
         ]
     },
     "footer": {

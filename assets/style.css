@@ -110,6 +110,7 @@ main {
 /* Summary item */
 .summary-item {
     height: 90px;
+    width: 207px;
     padding: 15px 20px;
     display: flex;
     flex-direction: column;
@@ -141,4 +142,37 @@ main {
 .summary-label {
     font: var(--base-font);
     color: var(--workweek-color);
+}
+
+/* Third row */
+#third-row-container {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 50px;
+}
+
+.figure-summary-h {
+    width: calc(50% - 10px);
+    height: 100%;
+}
+
+.summary-aside.horizontal {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#item-count-container,
+#median-item-cost-container {
+    position: relative;
+    height: 490px;
+    max-height: 490px;
+    display: flex;
+    flex-direction: column;
 }
